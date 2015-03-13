@@ -166,3 +166,30 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64
 
 !ENTRY org.eclipse.ui 2 2 2015-03-11 13:38:09.187
 !MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+!SESSION 2015-03-13 13:36:08.893 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.7.0_75
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.net 1 0 2015-03-13 13:36:22.798
+!MESSAGE System property http.proxyHost is not set but should be cache.univ-lille1.fr.
+
+!ENTRY org.eclipse.core.net 1 0 2015-03-13 13:36:22.802
+!MESSAGE System property http.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2015-03-13 13:36:22.804
+!MESSAGE System property https.proxyHost is not set but should be cache.univ-lille1.fr.
+
+!ENTRY org.eclipse.core.net 1 0 2015-03-13 13:36:22.805
+!MESSAGE System property https.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2015-03-13 13:36:22.808
+!MESSAGE System property https.proxyHost is not set but should be cache.univ-lille1.fr.
+
+!ENTRY org.eclipse.core.net 1 0 2015-03-13 13:36:22.809
+!MESSAGE System property https.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.ui 2 2 2015-03-13 13:36:57.098
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
