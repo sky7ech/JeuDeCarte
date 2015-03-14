@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.util.Iterator;
 import org.skife.jdbi.v2.sqlobject.Bind;
@@ -9,10 +9,10 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface PlayerDao {
 	
-	/*@SqlUpdate("CREATE TABLE IF NOT EXISTS commentaires (id INTEGER PRIMARY KEY, id_video INTEGER, id_utilisateur INTEGER, commentaire TEXT, date TEXT, heure TEXT, FOREIGN KEY(id_video) REFERENCES videos(id), FOREIGN KEY(id_utilisateur) REFERENCES users(id))")
+	@SqlUpdate("CREATE TABLE IF NOT EXISTS player (pseudo TEXT,mdp TEXT,nom TEXT,prenom TEXT,CONSTRAINT pk_pseudo PRIMARY KEY(pseudo))")
 	public void createTable();
 	
-	@SqlUpdate("INSERT INTO commentaires (id_video,id_utilisateur,commentaire,date,heure) VALUES (:id_video,:id_utilisateur,:commentaire,:date,:heure)")
+	/*@SqlUpdate("INSERT INTO commentaires (id_video,id_utilisateur,commentaire,date,heure) VALUES (:id_video,:id_utilisateur,:commentaire,:date,:heure)")
 	public void insertCommentaire(@Bind("id_video") int id_video, @Bind("id_utilisateur") int id_utilisateur, @Bind("commentaire") String commentaire, @Bind("date") String date, @Bind("heure") String heure);
 
 	@SqlQuery("SELECT * FROM commentaires where id=:id")
