@@ -1,25 +1,26 @@
 package dao;
 
-import java.util.Iterator;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
+import data.Joueur;
+
 public interface PlayerDao {
 	
 	@SqlUpdate("CREATE TABLE IF NOT EXISTS player (pseudo TEXT,mdp TEXT,nom TEXT,prenom TEXT,CONSTRAINT pk_pseudo PRIMARY KEY(pseudo))")
 	public void createTable();
 	
-	/*@SqlUpdate("INSERT INTO commentaires (id_video,id_utilisateur,commentaire,date,heure) VALUES (:id_video,:id_utilisateur,:commentaire,:date,:heure)")
-	public void insertCommentaire(@Bind("id_video") int id_video, @Bind("id_utilisateur") int id_utilisateur, @Bind("commentaire") String commentaire, @Bind("date") String date, @Bind("heure") String heure);
+	@SqlUpdate("INSERT INTO player VALUES (:pseudo,:mdp,:nom,:prenom)")
+	public void insertPlayer(@Bind("pseudo") String pseudo, @Bind("mdp") String mdp, @Bind("nom") String nom, @Bind("prenom") String prenom);
 
-	@SqlQuery("SELECT * FROM commentaires where id=:id")
+	@SqlQuery("SELECT * from player where pseudo = :pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	public Commentaire getCommentaire(@Bind("id") int id);
+	Joueur getByPseudo(@Bind("pseudo") String pseudo);
 	
-	@SqlQuery("SELECT * FROM commentaires where id_video=:id_video")
+	/*@SqlQuery("SELECT * FROM commentaires where id_video=:id_video")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public Commentaire getCommentaireByVideo(@Bind("id_video") int id_video);
 	
@@ -37,11 +38,11 @@ public interface PlayerDao {
 	
 	@SqlQuery("SELECT * FROM commentaires where id_video=:id_video ORDER BY date DESC, heure DESC LIMIT :limit")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	public Iterator<Commentaire> getAllCommentaireDescLimit(@Bind("id_video") int id_video, @Bind("limit") int limit);
+	public Iterator<Commentaire> getAllCommentaireDescLimit(@Bind("id_video") int id_video, @Bind("limit") int limit);*/
 	
-	@SqlUpdate("DROP TABLE IF EXISTS commentaires")
+	@SqlUpdate("DROP TABLE IF EXISTS player")
 	public void dropTable();
 	
-	@SqlUpdate("DELETE FROM commentaires where id=:id")
-	public void deleteCommentaire(@Bind("id") int id);*/
+	@SqlUpdate("DELETE FROM player where pseudo=:pseudo")
+	public void deleteCommentaire(@Bind("pseudo") int pseudo);
 }
