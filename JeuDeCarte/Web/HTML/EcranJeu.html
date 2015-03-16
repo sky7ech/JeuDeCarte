@@ -5,6 +5,9 @@
 	rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Basile Card Games</title>
+<script src='../JavaScript//jquery-2.1.3.js'\>
+	$(document).ready(function() { });
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -37,41 +40,46 @@
 			</ul>
 		</div>
 		<div class="col-md-8">
-			<div class="col-md-2 col-md-offset-1">
-				<img src="../CSS/Image/1_1.jpg" height="120" width="87"  alt="..." class="img-rounded">
+			<div class="col-md-2 col-md-offset-1" id="Flop1">
+				<img src="../CSS/Image/Dos_Carte.jpg" height="120" width="87"
+					alt="..." class="img-rounded">
 			</div>
-			<div class="col-md-2">
-				<img src="../CSS/Image/Valet_carreau.jpg" alt="..."
-					class="img-rounded">
+			<div class="col-md-2" id="Flop2">
+				<img src="../CSS/Image/Dos_Carte.jpg" height="120" width="87"
+					alt="..." class="img-rounded">
 			</div>
-			<div class="col-md-2 ">
-				<img src="../CSS/Image/Dame_carreau.jpg" alt="..."
-					class="img-rounded">
+			<div class="col-md-2 " id="Flop3">
+				<img src="../CSS/Image/Dos_Carte.jpg" height="120" width="87"
+					alt="..." class="img-rounded">
 			</div>
-			<div class="col-md-2 ">
-				<img src="../CSS/Image/Roi_carreau.jpg" alt="..."
-					class="img-rounded">
+			<div class="col-md-2 " id="Turn">
+				<img src="../CSS/Image/Dos_Carte.jpg" height="120" width="87"
+					alt="..." class="img-rounded">
 			</div>
-			<div class="col-md-2">
-				<img src="../CSS/Image/As_carreau.jpg" alt="..." class="img-rounded">
+			<div class="col-md-2" id="River">
+				<img src="../CSS/Image/Dos_Carte.jpg" height="120" width="87"
+					alt="..." class="img-rounded">
 			</div>
 		</div>
 	</div>
 	<div class="btn-group col-md-4" role="group" aria-label="...">
 		<button type="button" class="btn btn-default">Se coucher</button>
 		<button type="button" class="btn btn-default">Checker</button>
-		<button type="button" class="btn btn-default">Suivre</button>
+		<button type="button" class="btn btn-default" id="Suivre" >Suivre</button>
 		<button type="button" class="btn btn-default">Relancer</button>
+		<button type="button" class="btn btn-default" id="Flop" >Flop</button>
+		<button type="button" class="btn btn-default" id= "Turn1">Turn </button>
+		<button type="button" class="btn btn-default" id="River1">River</button>
 	</div>
-	<div class="col-md-2 col-md-offset-2">
-		<img src="../CSS/Image/9_carreau.jpg" alt="..." class="img-rounded">
+	<div class="col-md-2 col-md-offset-2" id="Carte1">
 	</div>
-	<div class="col-md-2">
-		<img src="../CSS/Image/8_carreau.jpg" alt="..." class="img-rounded">
+	<div class="col-md-2" id="Carte2">
 	</div>
 	<div class="col-md-1 col-md-offset-2">
-		<INPUT TYPE="NUMBER" MIN="0" MAX="1010000000" STEP="1" VALUE="6" SIZE="6">
+		<INPUT TYPE="NUMBER" MIN="0" MAX="1010000000" STEP="1" VALUE="6"
+			SIZE="6">
 	</div>
+	<script src="../JavaScript/TirageCarte.js"></script>
 
 </body>
 </html>
