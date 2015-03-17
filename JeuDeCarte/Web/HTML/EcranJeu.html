@@ -30,13 +30,22 @@
 	</nav>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<ul class="list-group">
 				<li class="list-group-item">Joueur 1</li>
 				<li class="list-group-item">Joueur 2</li>
 				<li class="list-group-item">Joueur 3</li>
 				<li class="list-group-item">Joueur 4</li>
 				<li class="list-group-item">Joueur 5</li>
+			</ul>
+		</div>
+		<div class="col-md-2">
+			<ul class="list-group">
+				<li class="list-group-item" id="ActionJ1">Action</li>
+				<li class="list-group-item" id =ActionJ2">Action</li>
+				<li class="list-group-item">Action</li>
+				<li class="list-group-item">Action</li>
+				<li class="list-group-item">Action</li>
 			</ul>
 		</div>
 		<div class="col-md-8">
@@ -65,19 +74,18 @@
 	<div class="btn-group col-md-4" role="group" aria-label="...">
 		<button type="button" class="btn btn-default">Se coucher</button>
 		<button type="button" class="btn btn-default">Checker</button>
-		<button type="button" class="btn btn-default" id="Suivre" >Suivre</button>
-		<button type="button" class="btn btn-default">Relancer</button>
-		<button type="button" class="btn btn-default" id="Flop" >Flop</button>
-		<button type="button" class="btn btn-default" id= "Turn1">Turn </button>
+		<button type="button" class="btn btn-default" id="Suivre">Suivre</button>
+		<button type="button" class="btn btn-default" id = "Relancer">Relancer</button>
+		<button type="button" class="btn btn-default" id="Flop">Flop</button>
+		<button type="button" class="btn btn-default" id="Turn1">Turn
+		</button>
 		<button type="button" class="btn btn-default" id="River1">River</button>
 	</div>
-	<div class="col-md-2 col-md-offset-2" id="Carte1">
-	</div>
-	<div class="col-md-2" id="Carte2">
-	</div>
+	<div class="col-md-2 col-md-offset-2" id="Carte1"></div>
+	<div class="col-md-2" id="Carte2"></div>
 	<div class="col-md-1 col-md-offset-2">
 		<INPUT TYPE="NUMBER" MIN="0" MAX="1010000000" STEP="1" VALUE="6"
-			SIZE="6">
+			SIZE="6" = id = "Relance">
 	</div>
 	<script src="../JavaScript/TirageCarte.js"></script>
 
