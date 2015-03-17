@@ -1,16 +1,16 @@
 package data;
 
-public class Joueur {
+public class Player {
 
 	private String pseudo;
 	private String mdp;
 	private String nom;
 	private String prenom;
 
-	public Joueur() {
+	public Player() {
 	}
 
-	public Joueur(String pseudo, String mdp, String nom, String prenom) {
+	public Player(String pseudo, String mdp, String nom, String prenom) {
 		super();
 		this.pseudo = pseudo;
 		this.mdp = mdp;

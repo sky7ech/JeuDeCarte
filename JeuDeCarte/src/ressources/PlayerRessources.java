@@ -8,15 +8,15 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import dao.PlayerDao;
-import data.Joueur;
+import data.Player;
 
 @Path("/player")
 @Produces(MediaType.APPLICATION_JSON)
-public class JoueurRessources {
+public class PlayerRessources {
 
 	private static PlayerDao dao = null;
 
-	public JoueurRessources() {
+	public PlayerRessources() {
 		try {
 			dao.createTable();
 		} catch (Exception e) {
@@ -25,15 +25,15 @@ public class JoueurRessources {
 	}
 	
 	@POST
-	public Joueur createPlayer(Joueur player) {
+	public Player createPlayer(Player player) {
 		dao.insertPlayer(player.getPseudo(), player.getMdp(), player.getNom(), player.getPrenom());
 		return player;
 	}
 	
 	@GET
 	@Path("/{pseudo}")
-	public Joueur getPlayer(String pseudo) {
-		Joueur player = dao.getByPseudo(pseudo);
+	public Player getPlayer(String pseudo) {
+		Player player = dao.getByPseudo(pseudo);
 		if( player == null) {
 			throw new WebApplicationException(404);
 		}

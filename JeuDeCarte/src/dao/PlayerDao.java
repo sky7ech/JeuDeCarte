@@ -6,7 +6,7 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
-import data.Joueur;
+import data.Player;
 
 public interface PlayerDao {
 	
@@ -18,7 +18,7 @@ public interface PlayerDao {
 
 	@SqlQuery("SELECT * from player where pseudo = :pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	Joueur getByPseudo(@Bind("pseudo") String pseudo);
+	Player getByPseudo(@Bind("pseudo") String pseudo);
 	
 	/*@SqlQuery("SELECT * FROM commentaires where id_video=:id_video")
 	@RegisterMapperFactory(BeanMapperFactory.class)

@@ -15,7 +15,7 @@ public class App extends Application {
     @Override
     public Set<Class<?>> getClasses() {
     	Set<Class<?>> s = new HashSet<Class<?>>();
-    	s.add(JoueurRessources.class);
+    	s.add(PlayerRessources.class);
     	s.add(LoggingFilter.class);
     	return s;
     }
