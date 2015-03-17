@@ -1,6 +1,6 @@
 package data;
 
-public class JoueurPoker {
+public class PlayerPoker {
 
 	private int idTable;
 	private String pseudo;
@@ -10,11 +10,11 @@ public class JoueurPoker {
 	private int aJoue;
 	private int estCouche;
 
-	public JoueurPoker() {
+	public PlayerPoker() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public JoueurPoker(int idTable, String pseudo, String carte1,
+	public PlayerPoker(int idTable, String pseudo, String carte1,
 			String carte2, int pot, int aJoue, int estCouche) {
 		super();
 		this.idTable = idTable;

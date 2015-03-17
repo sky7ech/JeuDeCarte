@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,24 +15,56 @@ import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
-    ImageView imageCarte1;
-    ImageView imageCarte2;
-    ImageView imageCarteFlop1;
-    ImageView imageCarteFlop2;
-    ImageView imageCarteFlop3;
-    ImageView imageCarteFlop4;
-    ImageView imageCarteFlop5;
+    List<String> listeNomCartes;
+    List<ImageView> listeImageView;
+    List<String> listUser;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imageCarteFlop1 = (ImageView) findViewById(R.id.carteFlop1);
-        imageCarteFlop2 = (ImageView) findViewById(R.id.carteFlop2);
-        imageCarteFlop3 = (ImageView) findViewById(R.id.carteFlop3);
-        imageCarteFlop4 = (ImageView) findViewById(R.id.carteFlop4);
-        imageCarteFlop5 = (ImageView) findViewById(R.id.carteFlop5);
+
+        ImageView imageCarte1 = (ImageView) findViewById(R.id.carte1);
+        ImageView imageCarte2 = (ImageView) findViewById(R.id.carte2);
+        ImageView imageCarteFlop1 = (ImageView) findViewById(R.id.carteFlop1);
+        ImageView imageCarteFlop2 = (ImageView) findViewById(R.id.carteFlop2);
+        ImageView imageCarteFlop3 = (ImageView) findViewById(R.id.carteFlop3);
+        ImageView imageCarteFlop4 = (ImageView) findViewById(R.id.carteFlop4);
+        ImageView imageCarteFlop5 = (ImageView) findViewById(R.id.carteFlop5);
+        listeImageView = new ArrayList<>();
+        listeImageView.add(imageCarte1);
+        listeImageView.add(imageCarte2);
+        listeImageView.add(imageCarteFlop1);
+        listeImageView.add(imageCarteFlop2);
+        listeImageView.add(imageCarteFlop3);
+        listeImageView.add(imageCarteFlop4);
+        listeImageView.add(imageCarteFlop5);
+
+        initialiserPaquetCarte();
+        listUser = new ArrayList<>();
+
+        listUser.add((new User("tmp1",1000,20)).toString());
+        listUser.add((new User("tmp2",500000,1000)).toString());
+        listUser.add((new User("tmp3",1000000,1000000)).toString());
+        listUser.add((new User("tmp4",1000,20)).toString());
+        listUser.add((new User("tmp5",1000,20)).toString());
+        listUser.add((new User("tmp6",1000,20)).toString());
+        ListView listView = (ListView) findViewById(R.id.listUser);
+        ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listUser);
+        listView.setAdapter(itemsAdapter);
+    }
+
+    private void initialiserPaquetCarte() {
+        this.listeNomCartes = new ArrayList<>();
+        String nomDeLaCarte;
+        for (int i = 1; i < 14; i++) {
+            for (int j = 1; j < 5; j++) {
+                nomDeLaCarte = "a" + i + "_" + j;
+                listeNomCartes.add(nomDeLaCarte);
+            }
+        }
     }
 
 
@@ -56,14 +90,8 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public List<Integer> getIdList() {
-        List<Integer> idList = new ArrayList<Integer>();
-
-        return idList;
-    }
 
     public void redistributeCards(View view) {
-
         /*if(imageCarte1!=null) {
             ((BitmapDrawable) imageCarte1.getDrawable()).getBitmap().recycle();
         }
@@ -71,39 +99,21 @@ public class MainActivity extends ActionBarActivity {
             ((BitmapDrawable)imageCarte2.getDrawable()).getBitmap().recycle();
         }*/
 
-        imageCarte1 = (ImageView) findViewById(R.id.carte1);
-        imageCarte2 = (ImageView) findViewById(R.id.carte2);
-
-
         Random r = new Random();
-        int valeur = r.nextInt(13) + 1;
-        int couleur = r.nextInt(4) + 1;
-        String nomDeLaCarte1 = "a" + valeur + "_" + couleur;
-        System.out.print(nomDeLaCarte1);
-        imageCarte1.setImageResource(getResources().getIdentifier(nomDeLaCarte1, "drawable", getPackageName()));
-        String nomDeLaCarte2 = nomDeLaCarte1;
-        while (nomDeLaCarte2.equals(nomDeLaCarte1)) {
-            valeur = r.nextInt(13) + 1;
-            couleur = r.nextInt(4) + 1;
-            nomDeLaCarte2 = "a" + valeur + "_" + couleur;
+        int random;
+        for(int i = 0; i < 2; i++){
+            random = r.nextInt(listeNomCartes.size());
+            listeImageView.get(i).setImageResource(getResources().getIdentifier(listeNomCartes.get(random), "drawable", getPackageName()));
+            listeNomCartes.remove(random);
         }
-        System.out.println("   " + nomDeLaCarte2);
-        imageCarte2.setImageResource(getResources().getIdentifier(nomDeLaCarte2, "drawable", getPackageName()));
     }
 
     @Override
     public void onDestroy() {
-
         System.gc();
-        imageCarte1.setImageDrawable(null);
-        imageCarte2.setImageDrawable(null);
-        imageCarteFlop1.setImageDrawable(null);
-        imageCarteFlop1.setImageDrawable(null);
-        imageCarteFlop2.setImageDrawable(null);
-        imageCarteFlop3.setImageDrawable(null);
-        imageCarteFlop4.setImageDrawable(null);
-        imageCarteFlop5.setImageDrawable(null);
-
+        for(int i = 0; i < listeImageView.size(); i++){
+            listeImageView.get(i).setImageDrawable(null);
+        }
         super.onDestroy();
 
     }
