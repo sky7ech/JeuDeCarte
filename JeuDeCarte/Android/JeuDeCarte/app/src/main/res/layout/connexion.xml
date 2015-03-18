@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editPseudo"
+        android:hint="Pseudo"
+        android:singleLine="true"
+        android:inputType="text"
+        android:layout_marginTop="49dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editMdp"
+        android:hint="Mot de passe"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:layout_marginTop="49dp" />
+</RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="28" version="2.0">
+<workbench progressCount="13" version="2.0">
 <workbenchAdvisor/>
-<window height="768" maximized="true" width="1024" x="0" y="27">
+<window height="775" maximized="true" minimized="true" width="1020" x="557" y="57">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -13,7 +13,7 @@
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="156" y="30"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="116" y="30"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="124" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.debug.ui.launch.toolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -23,7 +23,7 @@
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.m2e.editor.MavenPomEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.browser.editor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -32,16 +32,10 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Carte.java" partName="Carte.java" path="/home/infoetu/dumazyc/s4/Projet/laughing-adventure/JeuDeCarte/src/Carte.java" title="Carte.java" tooltip="JeuDeCarte/src/Carte.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/JeuDeCarte/src/Carte.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="302" selectionTopPixel="0"/>
-</editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
@@ -90,7 +84,7 @@
 </viewState>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -216,14 +210,14 @@
 <fastViewBars>
 <fastViewBar fastViewLocation="16384" id="left" orientation="512" selectedTabId="org.eclipse.jdt.ui.PackageExplorer" style="0">
 <fastViews>
-<view id="org.eclipse.jdt.ui.PackageExplorer" ratio="0.29971388"/>
+<view id="org.eclipse.jdt.ui.PackageExplorer" ratio="0.2991014"/>
 </fastViews>
 </fastViewBar>
 </fastViewBars>
 <layout>
 <mainWindow>
 <info folder="true" part="left">
-<folder appearance="2" expanded="0">
+<folder appearance="2" expanded="2">
 <page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
@@ -272,80 +266,7 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory>
-<editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/JeuDeCarte/src/Carte.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.m2e.editor.MavenPomEditor" path="/JeuDeCarte/pom.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/JeuDeCarte/src/DAO/PlayerDao.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/JeuDeCarte/src/DAO/CarteDao.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/JeuDeCarte/src/DAO/PlayerDao.java"/>
-</editors>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="256" y="0"/>
-</item>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="48" y="0"/>
-</item>
-<item historyLabel="JeuDeCarte/pom.xml" index="1"/>
-<item historyLabel="PlayerDao.java" index="2">
-<position/>
-</item>
-<item historyLabel="JeuDeCarte/pom.xml" index="1"/>
-<item historyLabel="PlayerDao.java" index="2">
-<position/>
-</item>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="256" y="0"/>
-</item>
-<item historyLabel="PlayerDao.java" index="2">
-<position/>
-</item>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="256" y="0"/>
-</item>
-<item historyLabel="PlayerDao.java" index="2">
-<position info="not_deleted" x="614" y="0"/>
-</item>
-<item historyLabel="CarteDao.java" index="3">
-<position/>
-</item>
-<item historyLabel="PlayerDao.java" index="2">
-<position info="not_deleted" x="320" y="0"/>
-</item>
-<item historyLabel="CarteDao.java" index="3">
-<position/>
-</item>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="256" y="0"/>
-</item>
-<item historyLabel="CarteDao.java" index="3">
-<position/>
-</item>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="40" y="0"/>
-</item>
-<item historyLabel="CarteDao.java" index="3">
-<position/>
-</item>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="256" y="0"/>
-</item>
-<item historyLabel="CarteDao.java" index="3">
-<position info="not_deleted" x="1220" y="0"/>
-</item>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="256" y="0"/>
-</item>
-<item historyLabel="PlayerDao.java" index="4">
-<position info="not_deleted" x="315" y="0"/>
-</item>
-<item historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="256" y="0"/>
-</item>
-<item active="true" historyLabel="Carte.java" index="0">
-<position info="not_deleted" x="46" y="0"/>
-</item>
-</navigationHistory>
+<navigationHistory/>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
@@ -366,6 +287,12 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="icon_launcher.jpg" tooltip="JeuDeCarte/Android/JeuDeCarte/app/src/main/res/drawable-xxhdpi/icon_launcher.jpg">
+<persistable path="/JeuDeCarte/Android/JeuDeCarte/app/src/main/res/drawable-xxhdpi/icon_launcher.jpg"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Table.java" tooltip="JeuDeCarte/src/Table.java">
+<persistable path="/JeuDeCarte/src/Table.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Carte.java" tooltip="JeuDeCarte/src/Carte.java">
 <persistable path="/JeuDeCarte/src/Carte.java"/>
 </file>

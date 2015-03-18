@@ -1,13 +1,14 @@
 package fr.univ_lille1.iut_info.dumazyc.jeudecarte;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,16 +45,18 @@ public class MainActivity extends ActionBarActivity {
         initialiserPaquetCarte();
         listUser = new ArrayList<>();
 
-        listUser.add((new User("tmp1",1000,20)).toString());
-        listUser.add((new User("tmp2",500000,1000)).toString());
-        listUser.add((new User("tmp3",1000000,1000000)).toString());
-        listUser.add((new User("tmp4",1000,20)).toString());
-        listUser.add((new User("tmp5",1000,20)).toString());
-        listUser.add((new User("tmp6",1000,20)).toString());
+        listUser.add((new User("tmp1", 1000, 20)).toString());
+        listUser.add((new User("tmp2", 500000, 1000)).toString());
+        listUser.add((new User("tmp3", 1000000, 1000000)).toString());
+        listUser.add((new User("tmp4", 1000, 20)).toString());
+        listUser.add((new User("tmp5", 1000, 20)).toString());
+        listUser.add((new User("tmp6", 1000, 20)).toString());
         ListView listView = (ListView) findViewById(R.id.listUser);
         ArrayAdapter<String> itemsAdapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listUser);
         listView.setAdapter(itemsAdapter);
+        TextView tw = (TextView) findViewById(R.id.nomUtilisateur);
+        tw.setText(listUser.get(0).substring(0, 5));
     }
 
     private void initialiserPaquetCarte() {
@@ -90,7 +93,9 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    public void connexion(View view){
+        setContentView(R.layout.connexion);
+    }
     public void redistributeCards(View view) {
         /*if(imageCarte1!=null) {
             ((BitmapDrawable) imageCarte1.getDrawable()).getBitmap().recycle();
@@ -101,17 +106,19 @@ public class MainActivity extends ActionBarActivity {
 
         Random r = new Random();
         int random;
-        for(int i = 0; i < 2; i++){
+        for (int i = 0; i < 2; i++) {
+
             random = r.nextInt(listeNomCartes.size());
             listeImageView.get(i).setImageResource(getResources().getIdentifier(listeNomCartes.get(random), "drawable", getPackageName()));
             listeNomCartes.remove(random);
         }
+
     }
 
     @Override
     public void onDestroy() {
         System.gc();
-        for(int i = 0; i < listeImageView.size(); i++){
+        for (int i = 0; i < listeImageView.size(); i++) {
             listeImageView.get(i).setImageDrawable(null);
         }
         super.onDestroy();

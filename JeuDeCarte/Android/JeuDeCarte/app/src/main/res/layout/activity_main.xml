@@ -52,31 +52,31 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/carteFlop1"
-                android:src="@drawable/a13_1" />
+                android:src="@drawable/a0_1" />
 
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/carteFlop2"
-                android:src="@drawable/a13_1" />
+                android:src="@drawable/a0_1" />
 
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/carteFlop3"
-                android:src="@drawable/a13_1" />
+                android:src="@drawable/a0_1" />
 
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/carteFlop4"
-                android:src="@drawable/a13_1" />
+                android:src="@drawable/a0_1" />
 
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/carteFlop5"
-                android:src="@drawable/a13_1" />
+                android:src="@drawable/a0_1" />
 
         </LinearLayout>
 
@@ -92,13 +92,13 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/carte1"
-                android:src="@drawable/a13_1" />
+                android:src="@drawable/a0_1" />
 
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/carte2"
-                android:src="@drawable/a13_1" />
+                android:src="@drawable/a0_1" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -107,6 +107,14 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/textButton1"
                 android:onClick="redistributeCards" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button2"
+                android:layout_gravity="center_vertical"
+                android:text="Se connecter"
+                android:onClick="connexion" />
 
         </LinearLayout>
     </RelativeLayout>
