@@ -1,15 +1,16 @@
 $('#NewButton').click(function (event) {
     $.ajax({
-    	url: "/books",
+    	url: "/v1/player",
    		data: {
-   			author: $('#newAuteur').val(),
-   			title: $('#newTitre').val(),	
+   			pseudo: $('#NewPseudo').val(),
+   			mdp: $('#NewMdp').val(),
+   			nom : $('#NewNom').val(),
+   			prenom : $('#NewPrenom').val(),
     	},
     	type: "POST",
     	dataType : "json",
     	success:function(json) {
-    		$("#output").empty();
-     		$("#output").append("Nouveau livre : ID : " + json.id + " Titre : " + json.title + " Auteur :" + json.author); 
+    		$("#output").append("Compte Creer"); 
     	},
     	error: function( xhr, status, errorThrown ) {
         	alert( "Sorry, there was a problem!" );
