@@ -1,7 +1,12 @@
 package dao;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
+import org.skife.jdbi.v2.tweak.BeanMapperFactory;
+
+import data.TablePoker;
 
 public interface TablePokerDao {
 
@@ -16,4 +21,8 @@ public interface TablePokerDao {
 	
 	@SqlUpdate("DELETE FROM tablePoker where idTable=:idTable")
 	public void deleteTablePoker(@Bind("idTable") int idTable);
+	
+	@SqlQuery("SELECT * FROM tablePoker where idTable=:idTable")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	public TablePoker getTablePoker(@Bind("idTable") int idTable);
 }
