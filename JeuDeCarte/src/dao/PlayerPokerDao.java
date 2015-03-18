@@ -19,12 +19,12 @@ public interface PlayerPokerDao {
 	@SqlUpdate("DROP TABLE IF EXISTS PlayerPoker")
 	public void dropTable();
 	
-	@SqlUpdate("DELETE FROM PlayerPoker where idTable=:idTable")
-	public void deletePlayerPoker(@Bind("idTable") int idTable);
+	@SqlUpdate("DELETE FROM PlayerPoker where idTable=:idTable and pseudo=:pseudo")
+	public void deletePlayerPoker(@Bind("idTable") int idTable,@Bind("pseudo") String pseudo);
 	
-	@SqlQuery("SELECT * FROM PlayerPoker where idTable=:idTable")
+	@SqlQuery("SELECT * FROM PlayerPoker where idTable=:idTable and pseudo=:pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	public PlayerPoker getPlayerPoker(@Bind("idTable") int idTable);
+	public PlayerPoker getPlayerPoker(@Bind("idTable") int idTable,@Bind("pseudo") String pseudo);
 	
 
 }
