@@ -10,12 +10,16 @@ import org.glassfish.jersey.filter.LoggingFilter;
 import org.skife.jdbi.v2.DBI;
 import org.sqlite.SQLiteDataSource;
 
+import dao.PlayerPokerDao;
+
 @ApplicationPath("/v1/")
 public class App extends Application {
     @Override
     public Set<Class<?>> getClasses() {
     	Set<Class<?>> s = new HashSet<Class<?>>();
     	s.add(PlayerRessources.class);
+    	s.add(TablePokerRessources.class);
+    	s.add(PlayerPokerDao.class);
     	s.add(LoggingFilter.class);
     	return s;
     }

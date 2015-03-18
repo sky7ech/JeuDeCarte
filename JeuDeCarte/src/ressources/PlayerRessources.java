@@ -14,7 +14,7 @@ import data.Player;
 @Produces(MediaType.APPLICATION_JSON)
 public class PlayerRessources {
 
-	private static PlayerDao dao = null;
+	private static PlayerDao dao = App.dbi.open(PlayerDao.class);
 
 	public PlayerRessources() {
 		try {
