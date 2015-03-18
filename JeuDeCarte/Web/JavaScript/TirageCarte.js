@@ -36,3 +36,8 @@ River1.onclick=function(){
 	var type1 = Math.floor(Math.random() * 13) +1;
 	$("#River").html("<img src=\"../CSS/Image/"+type1 + "_" + couleur1 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");
 }
+
+Relancer.onclick=function() {
+	var mise = Relance.value;
+	$("#ActionJ1").text("Relance à " + mise + " $")
+}
