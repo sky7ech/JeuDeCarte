@@ -9,13 +9,14 @@ public class PlayerPoker {
 	private int pot;
 	private int aJoue;
 	private int estCouche;
+	private int mise;
 
 	public PlayerPoker() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public PlayerPoker(int idTable, String pseudo, String carte1,
-			String carte2, int pot, int aJoue, int estCouche) {
+			String carte2, int pot, int aJoue, int estCouche, int mise) {
 		super();
 		this.idTable = idTable;
 		this.pseudo = pseudo;
@@ -24,6 +25,7 @@ public class PlayerPoker {
 		this.pot = pot;
 		this.aJoue = aJoue;
 		this.estCouche = estCouche;
+		this.mise=mise;
 	}
 
 	public int getIdTable() {
@@ -81,5 +83,14 @@ public class PlayerPoker {
 	public void setEstCouche(int estCouche) {
 		this.estCouche = estCouche;
 	}
+	
+	public int getMise() {
+		return mise;
+	}
+
+	public void setMise(int mise) {
+		this.mise = mise;
+	}
+
 
 }

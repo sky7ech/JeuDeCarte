@@ -26,5 +26,21 @@ public interface PlayerPokerDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public PlayerPoker getPlayerPoker(@Bind("idTable") int idTable,@Bind("pseudo") String pseudo);
 	
+	@SqlQuery("SELECT pot FROM PlayerPoker where pseudo=:pseudo")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	public int getPlayerPot(@Bind("pseudo") String pseudo);
+	
+	@SqlQuery("SELECT isJoue FROM PlayerPoker where pseudo=:pseudo")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	public int IsJoue(@Bind("pseudo") String pseudo);
+	
+	@SqlQuery("SELECT estCouche FROM PlayerPoker where pseudo=:pseudo")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	public int estCouche(@Bind("pseudo") String pseudo);
+	
+	@SqlQuery("SELECT mise FROM PlayerPoker where pseudo=:pseudo")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	public int getPlayerMise(@Bind("pseudo") String pseudo);
+	
 
 }

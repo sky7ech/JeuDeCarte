@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
@@ -25,4 +28,8 @@ public interface TablePokerDao {
 	@SqlQuery("SELECT * FROM tablePoker where idTable=:idTable")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public TablePoker getTablePoker(@Bind("idTable") int idTable);
+	
+	@SqlQuery("SELECT pseudo FROM tablePoker where idTable=:idTable ORDER BY ASC")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	public Iterator<String> getAllPseudoFromTable(@Bind("idTable") int idTable);
 }
