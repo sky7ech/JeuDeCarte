@@ -16,7 +16,7 @@ import fr.univ_lille.iut.data.PlayerPoker;
 public class PlayerPokerRessources {
 
 	private static PlayerPokerDao dao = App.dbi.open(PlayerPokerDao.class);
-	
+
 	public PlayerPokerRessources() {
 		try {
 			dao.createTable();
@@ -24,19 +24,23 @@ public class PlayerPokerRessources {
 			System.out.println("Table already exist");
 		}
 	}
-	
+
 	@POST
 	public PlayerPoker createPlayerPoker(PlayerPoker playerPoker) {
-		dao.insertPlayerPoker(playerPoker.getIdTable(), playerPoker.getPot(), playerPoker.getPseudo(), playerPoker.getCarte1(), playerPoker.getCarte2(), playerPoker.getaJoue(), playerPoker.getEstCouche());
+		dao.insertPlayerPoker(playerPoker.getIdTable(), playerPoker.getPot(),
+				playerPoker.getPseudo(), playerPoker.getCarte1(),
+				playerPoker.getCarte2(), playerPoker.getaJoue(),
+				playerPoker.getEstCouche());
 		return playerPoker;
 	}
-	
+
 	@GET
 	@Path("/{idTable}/{pseudo}")
 	@Produces("application/json")
-	public PlayerPoker getPlayer(@PathParam("idTable")int idTable, @PathParam("pseudo")String pseudo) {
+	public PlayerPoker getPlayer(@PathParam("idTable") int idTable,
+			@PathParam("pseudo") String pseudo) {
 		PlayerPoker playerPoker = dao.getPlayerPoker(idTable, pseudo);
-		if( playerPoker == null) {
+		if (playerPoker == null) {
 			throw new WebApplicationException(404);
 		}
 		return playerPoker;

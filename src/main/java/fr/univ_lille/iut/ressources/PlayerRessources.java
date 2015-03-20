@@ -24,19 +24,20 @@ public class PlayerRessources {
 			System.out.println("Table already exist");
 		}
 	}
-	
+
 	@POST
 	public Player createPlayer(Player player) {
-		dao.insertPlayer(player.getPseudo(), player.getMdp(), player.getNom(), player.getPrenom());
+		dao.insertPlayer(player.getPseudo(), player.getMdp(), player.getNom(),
+				player.getPrenom());
 		return player;
 	}
-	
+
 	@GET
 	@Path("/{pseudo}")
 	@Produces("application/json")
-	public Player getPlayer(@PathParam("pseudo")String pseudo) {
+	public Player getPlayer(@PathParam("pseudo") String pseudo) {
 		Player player = dao.getByPseudo(pseudo);
-		if( player == null) {
+		if (player == null) {
 			throw new WebApplicationException(404);
 		}
 		return player;

@@ -25,7 +25,7 @@ public class PlayerPoker {
 		this.pot = pot;
 		this.aJoue = aJoue;
 		this.estCouche = estCouche;
-		this.mise=mise;
+		this.mise = mise;
 	}
 
 	public int getIdTable() {
@@ -83,7 +83,7 @@ public class PlayerPoker {
 	public void setEstCouche(int estCouche) {
 		this.estCouche = estCouche;
 	}
-	
+
 	public int getMise() {
 		return mise;
 	}
@@ -91,6 +91,5 @@ public class PlayerPoker {
 	public void setMise(int mise) {
 		this.mise = mise;
 	}
-
 
 }
