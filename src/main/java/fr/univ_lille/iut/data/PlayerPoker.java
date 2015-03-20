@@ -1,4 +1,4 @@
-package main.java.fr.univ_lille.iut.data;
+package fr.univ_lille.iut.data;
 
 public class PlayerPoker {
 

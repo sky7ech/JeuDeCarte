@@ -1,12 +1,12 @@
-package main.java.fr.univ_lille.iut.dao;
-
-import main.java.fr.univ_lille.iut.data.PlayerPoker;
+package fr.univ_lille.iut.dao;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
+
+import fr.univ_lille.iut.data.PlayerPoker;
 
 public interface PlayerPokerDao {
 	

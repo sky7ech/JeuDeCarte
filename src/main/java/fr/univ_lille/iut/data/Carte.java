@@ -1,4 +1,4 @@
-package main.java.fr.univ_lille.iut.data;
+package fr.univ_lille.iut.data;
 /*http://commons.wikimedia.org/wiki/Playing_card
  * Pour jeu de 32 ou 52 carte
  * code image : 

@@ -1,4 +1,4 @@
-package main.java.fr.univ_lille.iut.ressources;
+package fr.univ_lille.iut.ressources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -7,8 +7,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import main.java.fr.univ_lille.iut.dao.PlayerDao;
-import main.java.fr.univ_lille.iut.data.Player;
+import fr.univ_lille.iut.dao.PlayerDao;
+import fr.univ_lille.iut.data.Player;
 
 @Path("/player")
 @Produces(MediaType.APPLICATION_JSON)

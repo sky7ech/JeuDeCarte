@@ -1,4 +1,4 @@
-package main.java.fr.univ_lille.iut.ressources;
+package fr.univ_lille.iut.ressources;
 
 public class TablePokerRessources {
 
