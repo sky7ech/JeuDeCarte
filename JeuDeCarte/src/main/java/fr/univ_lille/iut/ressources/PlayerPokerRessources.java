@@ -1,14 +1,14 @@
-package ressources;
+package main.java.fr.univ_lille.iut.ressources;
 
-import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import dao.PlayerPokerDao;
-import data.PlayerPoker;
+import main.java.fr.univ_lille.iut.dao.PlayerPokerDao;
+import main.java.fr.univ_lille.iut.data.PlayerPoker;
 
 @Path("/playerPoker")
 @Produces(MediaType.APPLICATION_JSON)
