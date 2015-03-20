@@ -20,26 +20,6 @@ public interface PlayerDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	Player getByPseudo(@Bind("pseudo") String pseudo);
 	
-	/*@SqlQuery("SELECT * FROM commentaires where id_video=:id_video")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	public Commentaire getCommentaireByVideo(@Bind("id_video") int id_video);
-	
-	@SqlQuery("SELECT * FROM commentaires where id_utilisateur=:id_utilisateur")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	public Commentaire getCommentaireByUser(@Bind("id_utilisateur") int id_utilisateur);
-	
-	@SqlQuery("SELECT * FROM commentaires")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	public Iterator<Commentaire> getAllCommentaire();
-	
-	@SqlQuery("SELECT * FROM commentaires ORDER BY date DESC, heure DESC")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	public Iterator<Commentaire> getAllCommentaireDesc();
-	
-	@SqlQuery("SELECT * FROM commentaires where id_video=:id_video ORDER BY date DESC, heure DESC LIMIT :limit")
-	@RegisterMapperFactory(BeanMapperFactory.class)
-	public Iterator<Commentaire> getAllCommentaireDescLimit(@Bind("id_video") int id_video, @Bind("limit") int limit);*/
-	
 	@SqlUpdate("DROP TABLE IF EXISTS player")
 	public void dropTable();
 	

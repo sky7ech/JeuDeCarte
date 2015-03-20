@@ -3,6 +3,7 @@ package fr.univ_lille.iut.ressources;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -32,7 +33,8 @@ public class PlayerPokerRessources {
 	
 	@GET
 	@Path("/{idTable}/{pseudo}")
-	public PlayerPoker getPlayer(int idTable, String pseudo) {
+	@Produces("application/json")
+	public PlayerPoker getPlayer(@PathParam("idTable")int idTable, @PathParam("pseudo")String pseudo) {
 		PlayerPoker playerPoker = dao.getPlayerPoker(idTable, pseudo);
 		if( playerPoker == null) {
 			throw new WebApplicationException(404);
