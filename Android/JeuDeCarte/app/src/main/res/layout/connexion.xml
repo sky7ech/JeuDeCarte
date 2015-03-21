@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewSeConnecter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/editPseudo"
@@ -20,7 +20,7 @@
         android:layout_above="@+id/editMdp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
-        android:hint="Pseudo"
+        android:hint="@string/pseudo"
         android:inputType="text"
         android:singleLine="true" />
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:hint="Mot de passe"
+        android:hint="@string/password"
 
         android:inputType="textPassword"
         android:singleLine="true" />
@@ -54,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
+            android:onClick="cliqueBouttonCreationCompte"
             android:text="Vous n'avez pas de compte"
 
             />

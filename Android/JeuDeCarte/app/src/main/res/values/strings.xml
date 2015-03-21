@@ -11,5 +11,11 @@
     <string name="textButtonSeCoucher">Se coucher</string>
     <string name="textButtonSuivre">Suivre</string>
     <string name="textButtonRelancer">Relancer</string>
+    <string name="textCreationProfil">Créer un nouveau profil</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="password">Mot de passe</string>
+    <string name="passwordverif">Vérification mot de passe</string>
+    <string name="adressemail">Adresse mail</string>
+    <string name="buttonCreerProfil">Créer Profil</string>
 
 </resources>

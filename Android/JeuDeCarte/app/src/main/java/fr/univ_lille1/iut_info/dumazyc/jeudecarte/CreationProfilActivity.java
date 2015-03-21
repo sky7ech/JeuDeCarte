@@ -7,26 +7,20 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-
-public class ConnexionActivity extends Activity {
+public class CreationProfilActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        setContentView(R.layout.connexion);
+        setContentView(R.layout.creation_profil);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     }
 
-    public void cliqueBouttonConnexion(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
-    public void cliqueBouttonCreationCompte(View v) {
-        Intent intent = new Intent(this, CreationProfilActivity.class);
+    public void cliqueBouttonCreer(View v) {
+        Intent intent = new Intent(this, ConnexionActivity.class);
         startActivity(intent);
         finish();
     }
