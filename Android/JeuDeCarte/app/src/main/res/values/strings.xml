@@ -8,5 +8,8 @@
     <string name="textButton1">Cartes Aléatoires</string>
     <string name="action_connexion">Se connecter</string>
     <string name="buttonconnexion">Se connecter</string>
+    <string name="textButtonSeCoucher">Se coucher</string>
+    <string name="textButtonSuivre">Suivre</string>
+    <string name="textButtonRelancer">Relancer</string>
 
 </resources>

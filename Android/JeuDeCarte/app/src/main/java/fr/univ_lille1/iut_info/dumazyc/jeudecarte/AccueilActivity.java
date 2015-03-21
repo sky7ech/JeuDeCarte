@@ -4,18 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.Window;
+import android.view.WindowManager;
 
-/**
- * Created by Clément Dumazy on 21/03/2015.
- */
+
 public class AccueilActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.accueil);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
     }
 
     public void cliqueBouttonAccueil(View v) {

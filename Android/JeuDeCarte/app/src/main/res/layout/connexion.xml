@@ -46,9 +46,8 @@
             android:id="@+id/buttonSeConnecter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buttonconnexion"
             android:onClick="cliqueBouttonConnexion"
-            />
+            android:text="@string/buttonconnexion" />
 
         <Button
             android:id="@+id/buttonCreationCompte"

@@ -1,12 +1,12 @@
 package fr.univ_lille1.iut_info.dumazyc.jeudecarte;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -17,17 +17,17 @@ import java.util.List;
 import java.util.Random;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     List<String> listeNomCartes;
     List<ImageView> listeImageView;
     List<String> listUser;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         create();
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     public void create() {
@@ -79,38 +79,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.action_connexion) {
-            setContentView(R.layout.connexion);
-            Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-            v.vibrate(25);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void connexion() {
-        setContentView(R.layout.connexion);
-    }
-
     public void redistributeCards(View view) {
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(25);
@@ -133,7 +101,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    @Override
+    /*@Override
     public void onDestroy() {
         System.gc();
         for (int i = 0; i < listeImageView.size(); i++) {
@@ -141,5 +109,5 @@ public class MainActivity extends ActionBarActivity {
         }
         super.onDestroy();
 
-    }
+    }*/
 }
