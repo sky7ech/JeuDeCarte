@@ -1,4 +1,4 @@
-package fr.univ_lille.iut.ressources;
+package fr.univ_lille.iut.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,11 +13,11 @@ import fr.univ_lille.iut.data.TablePoker;
 
 @Path("/tablePoker")
 @Produces(MediaType.APPLICATION_JSON)
-public class TablePokerRessources {
+public class TablePokerResources {
 
 	private static TablePokerDao dao = App.dbi.open(TablePokerDao.class);
 
-	public TablePokerRessources() {
+	public TablePokerResources() {
 		try {
 			dao.createTable();
 		} catch (Exception e) {

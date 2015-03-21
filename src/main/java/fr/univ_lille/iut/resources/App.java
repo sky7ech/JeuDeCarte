@@ -1,4 +1,4 @@
-package fr.univ_lille.iut.ressources;
+package fr.univ_lille.iut.resources;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +14,9 @@ public class App extends Application {
 	@Override
 	public Set<Class<?>> getClasses() {
 		Set<Class<?>> s = new HashSet<Class<?>>();
-		s.add(PlayerRessources.class);
-		s.add(TablePokerRessources.class);
-		s.add(PlayerPokerRessources.class);
+		s.add(PlayerResources.class);
+		s.add(TablePokerResources.class);
+		s.add(PlayerPokerResources.class);
 		return s;
 	}
 

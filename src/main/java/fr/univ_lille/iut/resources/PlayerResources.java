@@ -1,4 +1,4 @@
-package fr.univ_lille.iut.ressources;
+package fr.univ_lille.iut.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,11 +13,11 @@ import fr.univ_lille.iut.data.Player;
 
 @Path("/player")
 @Produces(MediaType.APPLICATION_JSON)
-public class PlayerRessources {
+public class PlayerResources {
 
 	private static PlayerDao dao = App.dbi.open(PlayerDao.class);
 
-	public PlayerRessources() {
+	public PlayerResources() {
 		try {
 			dao.createTable();
 		} catch (Exception e) {
