@@ -11,28 +11,17 @@ import android.widget.ImageView;
  * Created by Clément Dumazy on 21/03/2015.
  */
 public class AccueilActivity extends Activity {
-    Bundle b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil);
-        b = savedInstanceState;
-
     }
 
     public void cliqueBouttonAccueil(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ConnexionActivity.class);
         startActivity(intent);
         finish();
     }
-    /*public void onDestroy() {
-        System.gc();
-        Button i = (Button) findViewById(R.id.buttonAccueil);
-        i.setBackground(null);
 
-
-        super.onDestroy();
-
-    }*/
 }

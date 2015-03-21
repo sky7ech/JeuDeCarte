@@ -124,7 +124,7 @@ public class MainActivity extends ActionBarActivity {
 
         Random r = new Random();
         int random;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 7; i++) {
 
             random = r.nextInt(listeNomCartes.size());
             listeImageView.get(i).setImageResource(getResources().getIdentifier(listeNomCartes.get(random), "drawable", getPackageName()));
