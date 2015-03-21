@@ -1,5 +1,7 @@
 package fr.univ_lille.iut.resources;
 
+
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -35,7 +37,7 @@ public class TablePokerResources {
 	}
 
 	@GET
-	@Path("/{id}")
+	@Path("/{idTable}")
 	@Produces("application/json")
 	public TablePoker getTablePoker(@PathParam("idTable") int idTable) {
 		TablePoker tablePoker = dao.getTablePoker(idTable);

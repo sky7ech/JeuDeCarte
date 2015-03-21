@@ -27,10 +27,11 @@ public class PlayerPokerResources {
 
 	@POST
 	public PlayerPoker createPlayerPoker(PlayerPoker playerPoker) {
-		dao.insertPlayerPoker(playerPoker.getIdTable(), playerPoker.getPot(),
-				playerPoker.getPseudo(), playerPoker.getCarte1(),
-				playerPoker.getCarte2(), playerPoker.getaJoue(),
-				playerPoker.getEstCouche());
+		dao.insertPlayerPoker(playerPoker.getIdTable(),
+				playerPoker.getPseudo(), playerPoker.getPot(),
+				playerPoker.getCarte1(), playerPoker.getCarte2(),
+				playerPoker.getaJoue(), playerPoker.getEstCouche(),
+				playerPoker.getMise());
 		return playerPoker;
 	}
 

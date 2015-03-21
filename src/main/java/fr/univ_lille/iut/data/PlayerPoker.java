@@ -4,9 +4,9 @@ public class PlayerPoker {
 
 	private int idTable;
 	private String pseudo;
+	private int pot;
 	private String carte1;
 	private String carte2;
-	private int pot;
 	private int aJoue;
 	private int estCouche;
 	private int mise;
@@ -15,8 +15,8 @@ public class PlayerPoker {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PlayerPoker(int idTable, String pseudo, String carte1,
-			String carte2, int pot, int aJoue, int estCouche, int mise) {
+	public PlayerPoker(int idTable, String pseudo,int pot, String carte1,
+			String carte2, int aJoue, int estCouche, int mise) {
 		super();
 		this.idTable = idTable;
 		this.pseudo = pseudo;
