@@ -1,6 +1,8 @@
 package fr.univ_lille1.iut_info.dumazyc.jeudecarte;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,12 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        create();
+
+    }
+
+    public void create() {
+
         setContentView(R.layout.activity_main);
 
         ImageView imageCarte1 = (ImageView) findViewById(R.id.carte1);
@@ -89,14 +97,24 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_connexion) {
+            setContentView(R.layout.connexion);
+            Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(25);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void connexion(View view){
+    public void connexion() {
         setContentView(R.layout.connexion);
     }
+
     public void redistributeCards(View view) {
+        Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(25);
+
         /*if(imageCarte1!=null) {
             ((BitmapDrawable) imageCarte1.getDrawable()).getBitmap().recycle();
         }

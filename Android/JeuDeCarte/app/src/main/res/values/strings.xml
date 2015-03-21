@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="textViewConst">C\'est au tour de : </string>
     <string name="textButton1">Cartes Aléatoires</string>
+    <string name="action_connexion">Se connecter</string>
+    <string name="buttonconnexion">Se connecter</string>
 
 </resources>

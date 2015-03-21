@@ -3,21 +3,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editPseudo"
-        android:hint="Pseudo"
-        android:singleLine="true"
-        android:inputType="text"
-        android:layout_marginTop="49dp" />
+        android:layout_above="@+id/editPseudo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:text="Se connecter"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
+        android:id="@+id/editPseudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/editMdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:hint="Pseudo"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <EditText
         android:id="@+id/editMdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:hint="Mot de passe"
-        android:singleLine="true"
+
         android:inputType="textPassword"
-        android:layout_marginTop="49dp" />
+        android:singleLine="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editMdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp">
+
+        <Button
+            android:id="@+id/buttonSeConnecter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonconnexion"
+
+            />
+
+        <Button
+            android:id="@+id/buttonCreationCompte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="Vous n'avez pas de compte"
+
+            />
+    </LinearLayout>
+
+
 </RelativeLayout>
