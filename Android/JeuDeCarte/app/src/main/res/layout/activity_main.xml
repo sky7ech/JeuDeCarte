@@ -2,6 +2,7 @@
     android:id="@+id/linearLayout0"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/background"
     android:baselineAligned="false">
 
     <ListView
@@ -9,7 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:focusable="false" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -116,6 +118,7 @@
 
             <Button
                 android:id="@+id/buttonSeCoucher"
+                style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -123,6 +126,7 @@
 
             <Button
                 android:id="@+id/buttonSuivre"
+                style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -131,6 +135,7 @@
 
             <Button
                 android:id="@+id/buttonRelancer"
+                style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

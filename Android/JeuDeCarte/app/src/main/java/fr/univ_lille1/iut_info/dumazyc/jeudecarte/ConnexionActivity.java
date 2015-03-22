@@ -25,6 +25,7 @@ public class ConnexionActivity extends Activity {
         startActivity(intent);
         finish();
     }
+
     public void cliqueBouttonCreationCompte(View v) {
         Intent intent = new Intent(this, CreationProfilActivity.class);
         startActivity(intent);
