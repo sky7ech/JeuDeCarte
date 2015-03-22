@@ -7,16 +7,20 @@ public class User {
     private String pseudo;
     private Integer argentDispo;
     private Integer miseActuelle;
+    private Integer statut;
+    private boolean cEstASonTourDeJouer;
 
-    public User(String pseudo, Integer argentDispo, Integer miseActuelle) {
+    public User(String pseudo, Integer argentDispo, Integer miseActuelle, Integer statut, boolean cEstASonTourDeJouer) {
         this.pseudo = pseudo;
         this.argentDispo = argentDispo;
         this.miseActuelle = miseActuelle;
+        this.statut = statut;
+        this.cEstASonTourDeJouer = cEstASonTourDeJouer;
     }
 
     @Override
     public String toString() {
-        return pseudo +" "+argentDispo +" "+miseActuelle;
+        return pseudo;
     }
 
     public String getPseudo() {
@@ -41,5 +45,21 @@ public class User {
 
     public void setMiseActuelle(Integer miseActuelle) {
         this.miseActuelle = miseActuelle;
+    }
+
+    public Integer getStatut() {
+        return statut;
+    }
+
+    public void setStatut(Integer statut) {
+        this.statut = statut;
+    }
+
+    public boolean getcEstASonTourDeJouer() {
+        return cEstASonTourDeJouer;
+    }
+
+    public void setcEstASonTourDeJouer(boolean cEstASonTourDeJouer) {
+        this.cEstASonTourDeJouer = cEstASonTourDeJouer;
     }
 }

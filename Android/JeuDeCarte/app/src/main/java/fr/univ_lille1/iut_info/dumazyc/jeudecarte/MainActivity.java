@@ -20,7 +20,8 @@ import java.util.Random;
 public class MainActivity extends Activity {
     List<String> listeNomCartes;
     List<ImageView> listeImageView;
-    List<String> listUser;
+    List<String> listUserString;
+    List<User> listUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +52,32 @@ public class MainActivity extends Activity {
         listeImageView.add(imageCarteFlop5);
 
         initialiserPaquetCarte();
-        listUser = new ArrayList<>();
-
-        listUser.add((new User("tmp1", 1000, 20)).toString());
-        listUser.add((new User("tmp2", 500000, 1000)).toString());
-        listUser.add((new User("tmp3", 1000000, 1000000)).toString());
-        listUser.add((new User("tmp4", 1000, 20)).toString());
-        listUser.add((new User("tmp5", 1000, 20)).toString());
-        listUser.add((new User("tmp6", 1000, 20)).toString());
+        /*listUserString = new ArrayList<>();
+        listUserString.add((new User("tmp1", 1000, 20,0,true)).toString());
+        listUserString.add((new User("tmp2", 500000, 1000,0,false)).toString());
+        listUserString.add((new User("tmp3", 1000000, 1000000,0,false)).toString());
+        listUserString.add((new User("tmp4", 1000, 20,0,false)).toString());
+        listUserString.add((new User("tmp5", 1000, 20,0,false)).toString());
+        listUserString.add((new User("tmp6", 1000, 20,0,false)).toString());
         ListView listView = (ListView) findViewById(R.id.listUser);
         ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listUser);
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listUserString);
         listView.setAdapter(itemsAdapter);
         TextView tw = (TextView) findViewById(R.id.nomUtilisateur);
-        tw.setText(listUser.get(0).substring(0, 5));
+        tw.setText(listUserString.get(0).substring(0, 5));*/
+        listUser = new ArrayList<>();
+        listUser.add(new User("tmp1", 1000, 150, 0, true));
+        listUser.add(new User("tmp2", 500000, 150, 0, false));
+        listUser.add(new User("tmp3", 1000000, 700, 0, false));
+        listUser.add(new User("tmp4", 1000, 900, 0, false));
+        listUser.add(new User("tmp5", 1000, 0, 1, false));
+        listUser.add(new User("tmp6", 1000, 0, 2, false));
+        ListView listView = (ListView) findViewById(R.id.listUser);
+        ArrayAdapter<String> itemsAdapter = new CustomListAdapter(this, listUser);
+
+        listView.setAdapter(itemsAdapter);
+        TextView tw = (TextView) findViewById(R.id.nomUtilisateur);
+        tw.setText(listUser.get(0).toString());
     }
 
     private void initialiserPaquetCarte() {
