@@ -40,7 +40,7 @@ public class PlayerResourcesTest extends JerseyTest {
 		Player player = target("/player/test").request().get(Player.class);
 		assertEquals("test",player.getPseudo());
 	}
-	
+	 
 	private Player createPlayer(String pseudo, String mdp, String nom, String prenom) {
 		Player player = new Player(pseudo, mdp, nom, prenom);
 		Entity<Player> playerEntity = Entity.entity(player, MediaType.APPLICATION_JSON);
