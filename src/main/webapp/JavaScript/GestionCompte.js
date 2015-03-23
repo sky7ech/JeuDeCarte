@@ -1,6 +1,6 @@
-$('#NewButton').click(function (event) {
+$('#CreationCompte').click(function (event) {
     $.ajax({
-    	url: "/v1/player",
+    	url: "/player",
    		data: {
    			pseudo: $('#NewPseudo').val(),
    			mdp: $('#NewMdp').val(),
