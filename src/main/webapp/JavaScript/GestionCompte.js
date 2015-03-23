@@ -1,13 +1,14 @@
 $('#CreationCompte').click(function (event) {
     $.ajax({
-    	url: "/player",
-   		data: {
+    	url: "v1/player",
+    	contentType : 'application/json',
+   		data: JSON.stringify({
    			pseudo: $('#NewPseudo').val(),
-   			mdp: $('#NewMdp').val(),
+   			mdp: $('#NewMDP').val(),
    			nom : $('#NewNom').val(),
    			prenom : $('#NewPrenom').val(),
-    	},
-    	type: "POST",
+    	}),
+    	type: 'POST',
     	dataType : "json",
     	success:function(json) {
     		$("#output").append("Compte Creer"); 
@@ -23,3 +24,4 @@ $('#CreationCompte').click(function (event) {
     	}
 		});
 	});
+
