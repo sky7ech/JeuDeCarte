@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.skife.jdbi.v2.DBI;
 
 import fr.univ_lille.iut.dao.PlayerPokerDao;
 import fr.univ_lille.iut.data.PlayerPoker;
+import fr.univ_lille.iut.data.TablePoker;
 import fr.univ_lille.iut.resources.App;
 
 public class PlayerPokerResourcesTest extends JerseyTest {
@@ -62,6 +64,8 @@ public class PlayerPokerResourcesTest extends JerseyTest {
 		assertEquals(200,statut);
 		PlayerPoker MajplayerPoker = target("/playerPoker/1/test").request().get(
 				PlayerPoker.class);
+		TablePoker tablePoker = target("/tablePoker/1").request().get(TablePoker.class);
+		assertEquals(500, tablePoker.getPot());
 		assertEquals(500,MajplayerPoker.getMise());
 		assertEquals(700, MajplayerPoker.getPot());
 	}

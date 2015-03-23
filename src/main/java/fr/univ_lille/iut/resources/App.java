@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.skife.jdbi.v2.DBI;
 import org.sqlite.SQLiteDataSource;
 
@@ -17,6 +18,7 @@ public class App extends Application {
 		s.add(PlayerResources.class);
 		s.add(TablePokerResources.class);
 		s.add(PlayerPokerResources.class);
+    	s.add(LoggingFilter.class);
 		return s;
 	}
 

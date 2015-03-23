@@ -34,4 +34,7 @@ public interface TablePokerDao {
 	@SqlQuery("SELECT pseudo FROM tablePoker where idTable=:idTable ORDER BY ASC")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public Iterator<String> getAllPseudoFromTable(@Bind("idTable") int idTable);
+	
+	@SqlUpdate("UPDATE tablePoker SET pot=:pot WHERE idTable=:idTable")
+	public void setPot(@Bind("pot") int pot, @Bind("idTable") int idTable);
 }
