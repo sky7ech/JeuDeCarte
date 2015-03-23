@@ -26,5 +26,5 @@ public interface PlayerDao {
 	public void dropTable();
 
 	@SqlUpdate("DELETE FROM player where pseudo=:pseudo")
-	public void deleteCommentaire(@Bind("pseudo") int pseudo);
+	public void deletePlayer(@Bind("pseudo") int pseudo);
 }

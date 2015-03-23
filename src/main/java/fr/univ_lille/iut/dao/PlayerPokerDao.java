@@ -19,32 +19,35 @@ public interface PlayerPokerDao {
 			@Bind("carte1") String carte1, @Bind("carte2") String carte2,
 			@Bind("aJoue") int aJoue, @Bind("estCouche") int estCouche, @Bind("mise") int mise);
 
-	@SqlUpdate("DROP TABLE IF EXISTS PlayerPoker")
+	@SqlUpdate("DROP TABLE IF EXISTS playerPoker")
 	public void dropTable();
 
-	@SqlUpdate("DELETE FROM PlayerPoker where idTable=:idTable and pseudo=:pseudo")
+	@SqlUpdate("DELETE FROM playerPoker where idTable=:idTable and pseudo=:pseudo")
 	public void deletePlayerPoker(@Bind("idTable") int idTable,
 			@Bind("pseudo") String pseudo);
 
-	@SqlQuery("SELECT * FROM PlayerPoker where idTable=:idTable and pseudo=:pseudo")
+	@SqlQuery("SELECT * FROM playerPoker where idTable=:idTable and pseudo=:pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public PlayerPoker getPlayerPoker(@Bind("idTable") int idTable,
 			@Bind("pseudo") String pseudo);
 
-	@SqlQuery("SELECT pot FROM PlayerPoker where pseudo=:pseudo")
+	@SqlQuery("SELECT pot FROM playerPoker where pseudo=:pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public int getPlayerPot(@Bind("pseudo") String pseudo);
 
-	@SqlQuery("SELECT aJoue FROM PlayerPoker where pseudo=:pseudo")
+	@SqlQuery("SELECT aJoue FROM playerPoker where pseudo=:pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public int aJoue(@Bind("pseudo") String pseudo);
 
-	@SqlQuery("SELECT estCouche FROM PlayerPoker where pseudo=:pseudo")
+	@SqlQuery("SELECT estCouche FROM playerPoker where pseudo=:pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public int estCouche(@Bind("pseudo") String pseudo);
 
-	@SqlQuery("SELECT mise FROM PlayerPoker where pseudo=:pseudo")
+	@SqlQuery("SELECT mise FROM playerPoker where pseudo=:pseudo")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	public int getPlayerMise(@Bind("pseudo") String pseudo);
+	
+	@SqlUpdate("UPDATE playerPoker SET mise=:mise, pot=:pot WHERE pseudo=:pseudo")
+	public void setMise(@Bind("mise") int mise,@Bind("pot") int pot, @Bind("pseudo") String pseudo);
 
 }

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
-
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,5 +51,18 @@ public class PlayerPokerResourcesTest extends JerseyTest {
 		PlayerPoker savedPlayerPoker = target("/playerPoker").request()
 				.post(playerPokerEntity).readEntity(PlayerPoker.class);
 		return savedPlayerPoker;
+	}
+	
+	@Test
+	public void testUpdateMise() {
+		PlayerPoker playerPoker = this.createPlayerPoker(1, "test", 1200, "carte1", "carte2", 0, 0, 0);
+		Entity<PlayerPoker> playerPokerEntity = Entity.entity(playerPoker,
+				MediaType.APPLICATION_JSON);
+		int statut = target("/playerPoker/500").request().put(playerPokerEntity).getStatus();
+		assertEquals(200,statut);
+		PlayerPoker MajplayerPoker = target("/playerPoker/1/test").request().get(
+				PlayerPoker.class);
+		assertEquals(500,MajplayerPoker.getMise());
+		assertEquals(700, MajplayerPoker.getPot());
 	}
 }

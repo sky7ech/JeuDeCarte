@@ -2,6 +2,7 @@ package fr.univ_lille.iut.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,6 +46,13 @@ public class PlayerPokerResources {
 			throw new WebApplicationException(404);
 		}
 		return playerPoker;
+	}
+	
+	@PUT
+	@Path("/{mise}")
+	public PlayerPoker setMise(@PathParam("mise") int mise, PlayerPoker playerPoker) {
+		dao.setMise(mise,playerPoker.getPot() - mise, playerPoker.getPseudo());
+		return dao.getPlayerPoker(playerPoker.getIdTable(), playerPoker.getPseudo());
 	}
 
 }
