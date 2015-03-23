@@ -17,5 +17,6 @@
     <string name="passwordverif">Vérification mot de passe</string>
     <string name="adressemail">Adresse mail</string>
     <string name="buttonCreerProfil">Créer Profil</string>
+    <string name="buttonAnnuler">Annuler</string>
 
 </resources>

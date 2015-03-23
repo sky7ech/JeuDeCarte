@@ -7,8 +7,10 @@
         <item name="android:textColorHint">#FFFFFF</item>
         <item name="android:textColorLink">#FFFFFF</item>
         <item name="android:textColorHighlight">#FFFFFF</item>
-
+        <item name="android:editTextColor">@color/text_color</item>
     </style>
+
+
 
 
 </resources>

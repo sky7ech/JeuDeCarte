@@ -24,9 +24,13 @@
         android:layout_alignRight="@+id/editMdp"
         android:layout_alignStart="@+id/editMdp"
         android:layout_marginBottom="25dp"
+        android:autoText="false"
+        android:editable="false"
         android:hint="@string/pseudo"
         android:inputType="text"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:textIsSelectable="false" />
 
     <EditText
         android:id="@+id/editMdp"
@@ -37,7 +41,8 @@
         android:hint="@string/password"
 
         android:inputType="textPassword"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textColor="#FFFFFF" />
 
     <LinearLayout
         android:layout_width="wrap_content"

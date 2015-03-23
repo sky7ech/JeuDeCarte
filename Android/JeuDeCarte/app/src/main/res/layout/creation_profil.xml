@@ -24,7 +24,8 @@
         android:layout_alignStart="@+id/editTextPassword"
         android:layout_below="@+id/textViewCreationProfil"
         android:layout_marginTop="15dp"
-        android:hint="@string/pseudo" />
+        android:hint="@string/pseudo"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -35,7 +36,8 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextPasswordVerif"
@@ -46,7 +48,8 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/passwordverif"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -57,16 +60,32 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/adressemail"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF" />
 
-    <Button
-        android:id="@+id/buttonCreerProfil"
-        style="@style/AppTheme"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextEmail"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:onClick="cliqueBouttonCreer"
-        android:text="@string/buttonCreerProfil" />
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:id="@+id/buttonCreerProfil"
+            style="@style/AppTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="cliqueBouttonCreer"
+            android:text="@string/buttonCreerProfil" />
+
+        <Button
+            android:id="@+id/buttonAnnuler"
+            style="@style/AppTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:onClick="cliqueBouttonAnnuler"
+            android:text="@string/buttonAnnuler" />
+    </LinearLayout>
 </RelativeLayout>
