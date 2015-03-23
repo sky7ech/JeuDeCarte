@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.univ_lille.iut</groupId>
-    <artifactId>JeuDeCarte</artifactId>
+    <artifactId>jeudecarte</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>JeuDeCarte</name>
+    <name>jeudecarte</name>
 
     <build>
         <finalName>JeuDeCarte</finalName>
@@ -51,15 +51,17 @@
             <artifactId>jersey-container-servlet-core</artifactId>
             <!-- use the following artifactId if you don't need servlet 2.x compatibility -->
             <!-- artifactId>jersey-container-servlet</artifactId -->
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
         	<groupId>org.glassfish.jersey.test-framework.providers</groupId>
         	<artifactId>jersey-test-framework-provider-jetty</artifactId>
-        	<version>2.16</version>
+        	<version>${jersey.version}</version>
       	</dependency>
       	<dependency>
 			<groupId>org.jdbi</groupId>
