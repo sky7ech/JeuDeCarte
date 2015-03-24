@@ -37,6 +37,7 @@ public class PlayerPokerResourcesTest extends JerseyTest {
 
 	@Test
 	public void testReadPlayerPokerWithNameAndId() {
+		this.init();
 		this.createPlayerPoker(1, "test", 0, "carte1", "carte2", 0, 0, 0);
 		PlayerPoker playerPoker = target("/playerPoker/1/test").request().get(
 				PlayerPoker.class);
@@ -57,6 +58,7 @@ public class PlayerPokerResourcesTest extends JerseyTest {
 	
 	@Test
 	public void testUpdateMise() {
+		this.init();
 		PlayerPoker playerPoker = this.createPlayerPoker(1, "test", 1200, "carte1", "carte2", 0, 0, 0);
 		Entity<PlayerPoker> playerPokerEntity = Entity.entity(playerPoker,
 				MediaType.APPLICATION_JSON);
