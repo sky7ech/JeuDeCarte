@@ -2,7 +2,7 @@ $('#CreationCompte').click(function (event) {
 	if($('#NewPseudo').val() != '' && $('#NewMDP').val() != '' &&  $('#NewNom').val() != '' && $('#NewPrenom').val()!= ''){
 		if($("#NewMDP").val() == $("#VerifMDP").val()){
 			$.ajax({
-				url: "JeuDeCarte/webapi/player",
+				url: "/webapi/player",
 				contentType : 'application/json',
 				data: JSON.stringify({
 					pseudo: $('#NewPseudo').val(),
@@ -41,7 +41,7 @@ PageConnexion.onclick = function(){
 
 $('#Connexion').click(function (event) {
 	$.ajax({
-		url: "JeuDeCarte/webapi/player/" + $('#pseudo').val() ,
+		url: "/webapi/player/" + $('#pseudo').val() ,
 		contentType : 'application/json',
 		data: JSON.stringify({
 			pseudo : $('#pseudo').val(),
