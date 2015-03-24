@@ -18,5 +18,9 @@
     <string name="adressemail">Adresse mail</string>
     <string name="buttonCreerProfil">Créer Profil</string>
     <string name="buttonAnnuler">Annuler</string>
+    <string name="dialog_message">Message</string>
+    <string name="dialog_title">Titre</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Annuler</string>
 
 </resources>

@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 public class AccueilActivity extends Activity {
     MediaPlayer m;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +21,7 @@ public class AccueilActivity extends Activity {
 
         setContentView(R.layout.accueil);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        m = MediaPlayer.create(this,R.raw.start);
+        m = MediaPlayer.create(this, R.raw.start);
 
         m.start();
 

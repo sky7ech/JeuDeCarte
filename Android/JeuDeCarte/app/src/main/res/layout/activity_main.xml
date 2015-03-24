@@ -140,7 +140,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="38dp"
-                android:text="@string/textButtonRelancer" />
+                android:text="@string/textButtonRelancer"
+                android:onClick="relancer" />
 
         </LinearLayout>
     </RelativeLayout>
