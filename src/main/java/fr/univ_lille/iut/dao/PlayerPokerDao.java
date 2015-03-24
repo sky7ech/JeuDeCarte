@@ -1,5 +1,7 @@
 package fr.univ_lille.iut.dao;
 
+import java.util.Iterator;
+
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
@@ -33,5 +35,9 @@ public interface PlayerPokerDao {
 	
 	@SqlUpdate("UPDATE playerPoker SET mise=:mise, pot=:pot WHERE pseudo=:pseudo")
 	public void setMise(@Bind("mise") int mise,@Bind("pot") int pot, @Bind("pseudo") String pseudo);
+	
+	@SqlQuery("SELECT * FROM playerPoker where idTable=:idTable")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	public Iterator<PlayerPoker> getPlayerPokerbyId(@Bind("idTable") int idTable );
 
 }

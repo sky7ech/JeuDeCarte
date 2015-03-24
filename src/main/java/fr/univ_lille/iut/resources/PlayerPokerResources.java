@@ -1,5 +1,9 @@
 package fr.univ_lille.iut.resources;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -61,4 +65,19 @@ public class PlayerPokerResources {
 		return daoplayer.getPlayerPoker(playerPoker.getIdTable(), playerPoker.getPseudo());
 	}
 
+	@GET
+	@Path("/{idTable}")
+	@Produces("application/json")
+	public List<PlayerPoker> getPlayerPokerbyId(@PathParam("idTable") int idTable,
+			@PathParam("pseudo") String pseudo) {
+		Iterator<PlayerPoker> ite = daoplayer.getPlayerPokerbyId(idTable);
+		ArrayList<PlayerPoker> list = new ArrayList<PlayerPoker>();
+		while(ite.hasNext()) {
+			list.add(ite.next());
+		}
+		if (list.isEmpty()) {
+			throw new WebApplicationException(404);
+		}
+		return list;
+	}
 }
