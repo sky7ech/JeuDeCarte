@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
     private List<ImageView> listeImageView;
     private List<User> listUser;
     private Dialog d;
+    private Integer miseMinimale = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +56,10 @@ public class MainActivity extends Activity {
         listeImageView.add(imageCarteFlop5);
         initialiserPaquetCarte();
         listUser = new ArrayList<>();
-        listUser.add(new User("tmp1", 1000, 150, 0, true));
-        listUser.add(new User("tmp2", 500000, 150, 0, false));
-        listUser.add(new User("tmp3", 1000000, 700, 0, false));
-        listUser.add(new User("tmp4", 1000, 900, 0, false));
+        listUser.add(new User("tmp1", 1000, 0, 0, true));
+        listUser.add(new User("tmp2", 500000, 0, 0, false));
+        listUser.add(new User("tmp3", 1000000, 0, 0, false));
+        listUser.add(new User("tmp4", 1000, 0, 0, false));
         listUser.add(new User("tmp5", 1000, 0, 1, false));
         listUser.add(new User("tmp6", 1000, 0, 2, false));
         ListView listView = (ListView) findViewById(R.id.listUser);
@@ -66,7 +67,7 @@ public class MainActivity extends Activity {
 
         listView.setAdapter(itemsAdapter);
         TextView tw = (TextView) findViewById(R.id.nomUtilisateur);
-        tw.setText(listUser.get(0).toString());
+        tw.setText(cEstLeTourDeQui().getPseudo());
     }
 
     private void initialiserPaquetCarte() {
@@ -101,6 +102,15 @@ public class MainActivity extends Activity {
         return null;
     }
 
+    public int cEstLIndiceDeQui(User user) {
+        for (int i = 0; i < listUser.size(); i++) {
+            if (listUser.get(i).equals(user)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @Override
     public void onDestroy() {
         /*System.gc();
@@ -112,32 +122,57 @@ public class MainActivity extends Activity {
         super.onDestroy();
 
     }
+
     public void relancer(View view) {
-        int argent = cEstLeTourDeQui().getArgentDispo();
-        int miseMinimale=30;
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(25);
+        int argent = cEstLeTourDeQui().getArgentDispo();
+
         d = new Dialog(this);
         d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         d.setContentView(R.layout.custom_dialog_layout);
         TextView tvArgentDispo = (TextView) d.findViewById(R.id.tvArgent);
-        tvArgentDispo.setText(argent-miseMinimale + " €");
+        tvArgentDispo.setText(argent - miseMinimale + " €");
         TextView tvRelance = (TextView) d.findViewById(R.id.tvRelance);
         tvRelance.setText(miseMinimale + " €");
         Button button = (Button) d.findViewById(R.id.dialogButtonOK);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),cEstLeTourDeQui().getMiseActuelle()+"€",Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
                 d.dismiss();
+                passeAuProchainTour(5);
             }
         });
         SeekBar sk = (SeekBar) d.findViewById(R.id.seekBar);
-
-        sk.setMax(cEstLeTourDeQui().getArgentDispo()-miseMinimale);
-
-
-        sk.setOnSeekBarChangeListener(new ListenerSeekBar(miseMinimale,cEstLeTourDeQui(), tvArgentDispo, tvRelance));
+        sk.setMax(cEstLeTourDeQui().getArgentDispo() - miseMinimale);
+        sk.setOnSeekBarChangeListener(new ListenerSeekBar(miseMinimale, cEstLeTourDeQui(), tvArgentDispo, tvRelance));
         d.show();
+    }
+
+    public void reloadListJoueur() {
+        ListView listView = (ListView) findViewById(R.id.listUser);
+        ArrayAdapter<String> itemsAdapter = new CustomListAdapter(this, listUser);
+        listView.setAdapter(itemsAdapter);
+        TextView tw = (TextView) findViewById(R.id.nomUtilisateur);
+        tw.setText(cEstLeTourDeQui().getPseudo());
+
+    }
+
+    public void cliqueBoutonSeCoucher(View view) {
+        passeAuProchainTour(3);
+    }
+
+    public void cliqueBoutonSuivre(View view) {
+        passeAuProchainTour(4);
+    }
+
+    public void passeAuProchainTour(int statut) {
+        Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(25);
+        cEstLeTourDeQui().setStatut(statut);
+        User user = cEstLeTourDeQui();
+        listUser.get((cEstLIndiceDeQui(user) + 1) % listUser.size()).setcEstASonTourDeJouer(true);
+        user.setcEstASonTourDeJouer(false);
+        reloadListJoueur();
     }
 }

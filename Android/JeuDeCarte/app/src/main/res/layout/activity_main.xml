@@ -122,6 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:onClick="cliqueBoutonSeCoucher"
                 android:text="@string/textButtonSeCoucher" />
 
             <Button
@@ -131,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="38dp"
+                android:onClick="cliqueBoutonSuivre"
                 android:text="@string/textButtonSuivre" />
 
             <Button
@@ -140,8 +142,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="38dp"
-                android:text="@string/textButtonRelancer"
-                android:onClick="relancer" />
+                android:onClick="relancer"
+                android:text="@string/textButtonRelancer" />
 
         </LinearLayout>
     </RelativeLayout>
