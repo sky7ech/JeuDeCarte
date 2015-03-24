@@ -67,7 +67,7 @@ public class PlayerPokerResourcesTest extends JerseyTest {
 		PlayerPoker MajplayerPoker = target("/playerPoker/1/test").request().get(
 				PlayerPoker.class);
 		TablePoker tablePoker = target("/tablePoker/1").request().get(TablePoker.class);
-		assertEquals(500, tablePoker.getPot());
+		assertEquals(1000, tablePoker.getPot());
 		assertEquals(500,MajplayerPoker.getMise());
 		assertEquals(700, MajplayerPoker.getPot());
 	}
