@@ -66,7 +66,7 @@ public class Score {
 		for (int j = 0; j < nb.length; j++) {
 			if (nb[j] == 3) {
 				if(j == 1) {
-					score = (14 + 14 + 14);
+					score += (14 + 14 + 14);
 				}
 				if (j > 1) {
 					score += (j -1 + 14 + 14);
@@ -76,10 +76,45 @@ public class Score {
 		System.out.println(score);
 		return score;
 	}
+	
+	public int getCouleur() {
+		int couleur[] = new int[4];
+		String nb[] = new String[8];
+		String couleur2 = "";
+		for (int i = 1; i < 8; i++) {
+
+			for (int tmp = 1; tmp < 5; tmp++) {
+				if (cartes[i].substring(cartes[i].indexOf('_')+1).equals(tmp + ""))
+					couleur[tmp-1]++;
+					if (couleur[tmp-1] == 4) {
+						couleur2 = cartes[i].substring(cartes[i].indexOf('_')+1);
+							}
+					
+			}
+			for (int l = 1; l < 8; l++) {
+				if (couleur2.equals(cartes[l].substring(cartes[l].indexOf('_')+1))){
+						nb[l]=cartes[l].substring(0, cartes[l].indexOf('_'));
+					}
+			}
+			
+		}
+		for (int j = 0; j < nb.length; j++) {
+			
+			if(nb[j] != null && nb[j].equals("1")) {
+				score += 14;
+			}
+			if(nb[j] != null && !nb[j].equals("1")) {
+				score += Integer.parseInt(nb[j]) - 1;
+			}
+			System.out.println(nb[j]);
+			System.out.println("Score : " +score);
+		}
+		return score;
+	}
 
 	public static void main(String[] args) {
-		Score s = new Score("1_", "3_", "3_", "10_", "1_", "4_", "3_");
-		s.getBrelan();
+		Score s = new Score("1_1", "3_3", "3_4", "10_4", "1_4", "4_3", "3_4");
+		s.getCouleur();
 
 	}
 	
