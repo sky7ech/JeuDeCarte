@@ -52,10 +52,34 @@ public class Score {
 		System.out.println(score);
 		return score;
 	}
+	
+	public int getBrelan() {
+		int nb[] = new int[15];
+		for (int i = 1; i < 8; i++) {
+
+			for (int tmp = 1; tmp < 15; tmp++) {
+				if (cartes[i].substring(0, cartes[i].indexOf('_')).equals(tmp + ""))	
+				nb[tmp]++;
+			}
+		}
+		
+		for (int j = 0; j < nb.length; j++) {
+			if (nb[j] == 3) {
+				if(j == 1) {
+					score = (14 + 14 + 14);
+				}
+				if (j > 1) {
+					score += (j -1 + 14 + 14);
+				}
+			}
+			}
+		System.out.println(score);
+		return score;
+	}
 
 	public static void main(String[] args) {
-		Score s = new Score("1_", "2_", "3_", "10_", "1_", "4_", "3_");
-		s.getPaire();
+		Score s = new Score("1_", "3_", "3_", "10_", "1_", "4_", "3_");
+		s.getBrelan();
 
 	}
 	
