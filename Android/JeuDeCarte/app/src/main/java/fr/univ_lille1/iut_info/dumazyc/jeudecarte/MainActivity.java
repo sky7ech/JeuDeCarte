@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,10 @@ import java.util.Random;
 
 
 public class MainActivity extends Activity {
-    List<String> listeNomCartes;
-    List<ImageView> listeImageView;
-    List<User> listUser;
-    Dialog d;
+    private List<String> listeNomCartes;
+    private List<ImageView> listeImageView;
+    private List<User> listUser;
+    private Dialog d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,29 +112,32 @@ public class MainActivity extends Activity {
         super.onDestroy();
 
     }
-
     public void relancer(View view) {
         int argent = cEstLeTourDeQui().getArgentDispo();
-        int mise = 0;
+        int miseMinimale=30;
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(25);
         d = new Dialog(this);
         d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         d.setContentView(R.layout.custom_dialog_layout);
         TextView tvArgentDispo = (TextView) d.findViewById(R.id.tvArgent);
-        tvArgentDispo.setText(argent + " €");
+        tvArgentDispo.setText(argent-miseMinimale + " €");
         TextView tvRelance = (TextView) d.findViewById(R.id.tvRelance);
-        tvRelance.setText(mise + " €");
+        tvRelance.setText(miseMinimale + " €");
         Button button = (Button) d.findViewById(R.id.dialogButtonOK);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),cEstLeTourDeQui().getMiseActuelle()+"€",Toast.LENGTH_SHORT).show();
                 d.dismiss();
             }
         });
         SeekBar sk = (SeekBar) d.findViewById(R.id.seekBar);
-        sk.setMax(1000);
-        sk.setOnSeekBarChangeListener(new ListenerSeekBar(argent, mise, tvArgentDispo, tvRelance));
+
+        sk.setMax(cEstLeTourDeQui().getArgentDispo()-miseMinimale);
+
+
+        sk.setOnSeekBarChangeListener(new ListenerSeekBar(miseMinimale,cEstLeTourDeQui(), tvArgentDispo, tvRelance));
         d.show();
     }
 }

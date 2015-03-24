@@ -4,24 +4,24 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class ListenerSeekBar implements SeekBar.OnSeekBarChangeListener {
-    private int argent;
-    private int mise;
+    private  User user;
+    private int miseMinimale;
+
     private TextView tvArgent;
     private TextView tvMise;
 
-    public ListenerSeekBar(int argent, int mise, TextView tvArgent, TextView tvMise) {
-        this.argent = argent;
-        this.mise = mise;
+    public ListenerSeekBar(int miseMinimale, User user, TextView tvArgent, TextView tvMise) {
+        this.miseMinimale = miseMinimale;
+       this.user= user;
         this.tvArgent = tvArgent;
         this.tvMise = tvMise;
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-        tvArgent.setText(argent-progress+" €");
-        
-        tvMise.setText(progress+" €");
+        tvArgent.setText(user.getArgentDispo()-progress-miseMinimale+" €");
+        tvMise.setText(miseMinimale+progress+" €");
+        user.setMiseActuelle(miseMinimale+progress);
     }
 
     @Override
