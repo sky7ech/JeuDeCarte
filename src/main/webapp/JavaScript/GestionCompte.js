@@ -2,7 +2,7 @@ $('#CreationCompte').click(function (event) {
 	if($('#NewPseudo').val() != '' && $('#NewMDP').val() != '' &&  $('#NewNom').val() != '' && $('#NewPrenom').val()!= ''){
 		if($("#NewMDP").val() == $("#VerifMDP").val()){
 			$.ajax({
-				url: "webapi/player/",
+				url: "JeuDeCarte/webapi/player/",
 				contentType : 'application/json',
 				data: JSON.stringify({
 					pseudo: $('#NewPseudo').val(),
