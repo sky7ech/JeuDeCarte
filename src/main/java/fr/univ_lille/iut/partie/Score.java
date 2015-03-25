@@ -1,5 +1,10 @@
 package fr.univ_lille.iut.partie;
 
+
+/* On part du principe ici que la carte la plus forte est l'AS (14) et que les cartes précédentes  
+ * valent chacune leur valeur -1 (Vallet, Dame, Roi = 11,12,13)
+ */
+
 public class Score {
 	
 	private static String carte1;
@@ -10,7 +15,7 @@ public class Score {
 	private static String carte6;
 	private static String carte7;
 	private String []cartes = new String[8];
-	private int score;
+	private int score = 0;
 	
 	public Score(String carte1, String carte2, String carte3, String carte4,
 			String carte5, String carte6, String carte7) {
@@ -106,15 +111,29 @@ public class Score {
 			if(nb[j] != null && !nb[j].equals("1")) {
 				score += Integer.parseInt(nb[j]) - 1;
 			}
-			System.out.println(nb[j]);
 			System.out.println("Score : " +score);
 		}
 		return score;
 	}
+	
+	public int getHigh() {
+		for (int i = 1; i < 8; i++) {
+			if (Integer.parseInt(cartes[i].substring(0, cartes[i].indexOf('_')))>score) {
+				if (Integer.parseInt(cartes[i].substring(0, cartes[i].indexOf('_'))) != 1) {
+				score = Integer.parseInt(cartes[i].substring(0, cartes[i].indexOf('_')))-1;
+				} else {
+					score = 14;
+				}
+			}
+		}
+		System.out.println(score);
+		return score;
+		
+	}
 
 	public static void main(String[] args) {
-		Score s = new Score("1_1", "3_3", "3_4", "10_4", "1_4", "4_3", "3_4");
-		s.getCouleur();
+		Score s = new Score("5_1", "3_3", "3_4", "10_4", "6_4", "4_3", "3_4");
+		s.getHigh();
 
 	}
 	
