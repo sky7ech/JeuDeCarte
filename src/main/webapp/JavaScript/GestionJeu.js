@@ -25,11 +25,12 @@ $('#Afficher').click(function (event) {
 
 
 $('#Relancer').click(function(event){
-		url: "/webapi/playerpoker/" + $('#Relance').value,
+		url: "/webapi/playerpoker/" + $('#Relance').value + "?pseudo= {" + readCookie("pseudo") + "}&idTable={ " + readCookie(idTable)+ "}"
+		 "/,
+		/{mise}?pseudo={pseudo}&idTable={idTable}")
 		type: "PUT",
 		data: { 
-			$('#Relance').value
-			readCookie("pseudo");
+			
 		},
 		dataType: "json",
 		success: function(json){
