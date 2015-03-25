@@ -17,6 +17,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,6 +30,7 @@ public class MainActivity extends Activity {
     private List<User> listUser;
     private Dialog d;
     private Integer miseMinimale = 30;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +59,20 @@ public class MainActivity extends Activity {
         listeImageView.add(imageCarteFlop5);
         initialiserPaquetCarte();
         listUser = new ArrayList<>();
-        listUser.add(new User("tmp1", 1000, 0, 0, true));
-        listUser.add(new User("tmp2", 500000, 0, 0, false));
-        listUser.add(new User("tmp3", 1000000, 0, 0, false));
-        listUser.add(new User("tmp4", 1000, 0, 0, false));
-        listUser.add(new User("tmp5", 1000, 0, 1, false));
-        listUser.add(new User("tmp6", 1000, 0, 2, false));
+        listUser.add(new User("tmp1", 10000, 0, 0, true));
+        listUser.add(new User("tmp2", 10000, 0, 0, false));
+        listUser.add(new User("tmp3", 10000, 0, 0, false));
+        listUser.add(new User("tmp4", 10000, 0, 0, false));
+        listUser.add(new User("tmp5", 10000, 0, 1, false));
+        listUser.add(new User("tmp6", 10000, 0, 2, false));
         ListView listView = (ListView) findViewById(R.id.listUser);
         ArrayAdapter<String> itemsAdapter = new CustomListAdapter(this, listUser);
 
         listView.setAdapter(itemsAdapter);
-        TextView tw = (TextView) findViewById(R.id.nomUtilisateur);
-        tw.setText(cEstLeTourDeQui().getPseudo());
+        TextView tv = (TextView) findViewById(R.id.pot);
+        tv.setText("0 €");
+        TextView tw = (TextView) findViewById(R.id.miseMin);
+        tw.setText("30 €");
     }
 
     private void initialiserPaquetCarte() {
@@ -124,28 +129,32 @@ public class MainActivity extends Activity {
     }
 
     public void relancer(View view) {
+
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(25);
         int argent = cEstLeTourDeQui().getArgentDispo();
-
         d = new Dialog(this);
         d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         d.setContentView(R.layout.custom_dialog_layout);
         TextView tvArgentDispo = (TextView) d.findViewById(R.id.tvArgent);
-        tvArgentDispo.setText(argent - miseMinimale + " €");
+        tvArgentDispo.setText(argent - getMiseMinimaleJoueurEnCours() + " €");
         TextView tvRelance = (TextView) d.findViewById(R.id.tvRelance);
-        tvRelance.setText(miseMinimale + " €");
+        tvRelance.setText(getMiseMinimaleJoueurEnCours() + " €");
         Button button = (Button) d.findViewById(R.id.dialogButtonOK);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseTemporaire());
+                if (miseMinimale < cEstLeTourDeQui().getMiseActuelle()) {
+                    miseMinimale = cEstLeTourDeQui().getMiseActuelle();
+                }
                 d.dismiss();
                 passeAuProchainTour(5);
             }
         });
         SeekBar sk = (SeekBar) d.findViewById(R.id.seekBar);
-        sk.setMax(cEstLeTourDeQui().getArgentDispo() - miseMinimale);
-        sk.setOnSeekBarChangeListener(new ListenerSeekBar(miseMinimale, cEstLeTourDeQui(), tvArgentDispo, tvRelance));
+        sk.setMax(cEstLeTourDeQui().getArgentDispo() - getMiseMinimaleJoueurEnCours());
+        sk.setOnSeekBarChangeListener(new ListenerSeekBar(getMiseMinimaleJoueurEnCours(), cEstLeTourDeQui(), tvArgentDispo, tvRelance));
         d.show();
     }
 
@@ -153,9 +162,18 @@ public class MainActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.listUser);
         ArrayAdapter<String> itemsAdapter = new CustomListAdapter(this, listUser);
         listView.setAdapter(itemsAdapter);
-        TextView tw = (TextView) findViewById(R.id.nomUtilisateur);
-        tw.setText(cEstLeTourDeQui().getPseudo());
+        TextView t = (TextView) findViewById(R.id.pot);
+        t.setText(getPot() + " €");
+        TextView tv = (TextView) findViewById(R.id.miseMin);
+        tv.setText(miseMinimale + " €");
+    }
 
+    public Integer getPot() {
+        Integer pot = 0;
+        for (int i = 0; i < listUser.size(); i++) {
+            pot += listUser.get(i).getMiseActuelle();
+        }
+        return pot;
     }
 
     public void cliqueBoutonSeCoucher(View view) {
@@ -163,6 +181,9 @@ public class MainActivity extends Activity {
     }
 
     public void cliqueBoutonSuivre(View view) {
+
+        cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseActuelle() + this.getMiseMinimaleJoueurEnCours());
+
         passeAuProchainTour(4);
     }
 
@@ -171,8 +192,46 @@ public class MainActivity extends Activity {
         v.vibrate(25);
         cEstLeTourDeQui().setStatut(statut);
         User user = cEstLeTourDeQui();
-        listUser.get((cEstLIndiceDeQui(user) + 1) % listUser.size()).setcEstASonTourDeJouer(true);
         user.setcEstASonTourDeJouer(false);
+        selectionneLeProchainJoueur(user);
+        if (tourTermine()) {
+            Toast.makeText(this, "Le gagnant du pot est " + cEstLeTourDeQui(), Toast.LENGTH_SHORT).show();
+        }
         reloadListJoueur();
+    }
+
+    public void selectionneLeProchainJoueur(User user) {
+        int indiceUser = (cEstLIndiceDeQui(user) + 1) % listUser.size();
+        if (tourTermine()) {
+            for (int i = 0; i < listUser.size(); i++) {
+                if (listUser.get(i).getStatut() != 3) {
+                    indiceUser = i;
+                }
+            }
+        } else {
+            while (listUser.get(indiceUser).getStatut() == 3) {
+                indiceUser = (indiceUser + 1) % listUser.size();
+            }
+        }
+        listUser.get(indiceUser).setcEstASonTourDeJouer(true);
+    }
+
+
+    public boolean tourTermine() {
+        int nombreDePersonneCouchee = 0;
+        for (int i = 0; i < listUser.size(); i++) {
+            if (listUser.get(i).getStatut() == 3) {
+                nombreDePersonneCouchee++;
+            }
+        }
+        return nombreDePersonneCouchee == listUser.size() - 1;
+    }
+
+    public Integer getMiseMinimaleJoueurEnCours() {
+        Integer miseMinimaleJoueur = 0;
+        if (miseMinimale > cEstLeTourDeQui().getMiseActuelle()) {
+            miseMinimaleJoueur = miseMinimale - cEstLeTourDeQui().getMiseActuelle();
+        }
+        return miseMinimaleJoueur;
     }
 }

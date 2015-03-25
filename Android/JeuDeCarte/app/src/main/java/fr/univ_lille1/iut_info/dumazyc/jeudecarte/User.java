@@ -9,6 +9,8 @@ public class User {
     private Integer miseActuelle;
     private Integer statut;
     private boolean cEstASonTourDeJouer;
+    private Integer miseTemporaire;
+
 
     public User(String pseudo, Integer argentDispo, Integer miseActuelle, Integer statut, boolean cEstASonTourDeJouer) {
         this.pseudo = pseudo;
@@ -44,7 +46,21 @@ public class User {
     }
 
     public void setMiseActuelle(Integer miseActuelle) {
+        if (miseActuelle != 0) {
+            this.setArgentDispo(this.argentDispo - (miseActuelle - this.miseActuelle));
+        }
         this.miseActuelle = miseActuelle;
+    }
+
+    public Integer getMiseTemporaire() {
+        return miseTemporaire;
+    }
+
+    public void setMiseTemporaire(Integer miseTemporaire) {
+        if (miseTemporaire != 0) {
+            this.setArgentDispo(this.argentDispo - (miseActuelle - this.miseActuelle));
+        }
+        this.miseTemporaire = miseTemporaire;
     }
 
     public Integer getStatut() {
@@ -62,4 +78,5 @@ public class User {
     public void setcEstASonTourDeJouer(boolean cEstASonTourDeJouer) {
         this.cEstASonTourDeJouer = cEstASonTourDeJouer;
     }
+
 }

@@ -21,7 +21,7 @@ public class ListenerSeekBar implements SeekBar.OnSeekBarChangeListener {
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         tvArgent.setText(user.getArgentDispo() - progress - miseMinimale + " €");
         tvMise.setText(miseMinimale + progress + " €");
-        user.setMiseActuelle(miseMinimale + progress);
+        user.setMiseTemporaire(miseMinimale + progress);
     }
 
     @Override
@@ -33,4 +33,5 @@ public class ListenerSeekBar implements SeekBar.OnSeekBarChangeListener {
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
+
 }

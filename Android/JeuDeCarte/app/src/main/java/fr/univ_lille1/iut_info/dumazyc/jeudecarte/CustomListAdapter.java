@@ -49,12 +49,13 @@ public class CustomListAdapter extends ArrayAdapter {
             statut.setText("A relancé");
         TextView mise = (TextView) rowView.findViewById(R.id.mise);
         if (listUser.get(position).getStatut() == 1 && listUser.get(position).getMiseActuelle() == 0) {
-            mise.setText("15" + "€");
+            listUser.get(position).setMiseActuelle(15);
+
         } else if (listUser.get(position).getStatut() == 2 && listUser.get(position).getMiseActuelle() == 0) {
-            mise.setText("30" + "€");
-        } else {
-            mise.setText(listUser.get(position).getMiseActuelle() + "€");
+            listUser.get(position).setMiseActuelle(30);
         }
+        mise.setText(listUser.get(position).getMiseActuelle() + "€");
+
         return rowView;
     }
 }
