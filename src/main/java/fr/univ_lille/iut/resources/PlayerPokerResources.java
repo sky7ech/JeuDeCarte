@@ -22,7 +22,8 @@ import fr.univ_lille.iut.data.TablePoker;
 @Produces(MediaType.APPLICATION_JSON)
 public class PlayerPokerResources {
 
-	private static PlayerPokerDao daoplayer = App.dbi.open(PlayerPokerDao.class);
+	private static PlayerPokerDao daoplayer = App.dbi
+			.open(PlayerPokerDao.class);
 	private static TablePokerDao daotable = App.dbi.open(TablePokerDao.class);
 
 	public PlayerPokerResources() {
@@ -55,24 +56,31 @@ public class PlayerPokerResources {
 		}
 		return playerPoker;
 	}
-	
+
 	@PUT
-	@Path("/{mise}")
-	public PlayerPoker setMise(@PathParam("mise") int mise, PlayerPoker playerPoker) {
-		daoplayer.setMise(mise,playerPoker.getPot() - mise, playerPoker.getPseudo());
-		TablePoker tablePoker = daotable.getTablePoker(playerPoker.getIdTable());
+	@Path("/{mise}?pseudo={pseudo}&idTable={idTable}")
+	public PlayerPoker setMise(@PathParam("mise") int mise,
+			@PathParam("pseudo") String pseudo,
+			@PathParam("idTable") int idTable) {
+		PlayerPoker playerPoker = daoplayer.getPlayerPoker(idTable, pseudo);
+		daoplayer.setMise(mise, playerPoker.getPot() - mise,
+				playerPoker.getPseudo());
+		TablePoker tablePoker = daotable
+				.getTablePoker(playerPoker.getIdTable());
 		daotable.setPot(tablePoker.getPot() + mise, tablePoker.getIdTable());
-		return daoplayer.getPlayerPoker(playerPoker.getIdTable(), playerPoker.getPseudo());
+		return daoplayer.getPlayerPoker(playerPoker.getIdTable(),
+				playerPoker.getPseudo());
 	}
 
 	@GET
 	@Path("/{idTable}")
 	@Produces("application/json")
-	public List<PlayerPoker> getPlayerPokerbyId(@PathParam("idTable") int idTable,
+	public List<PlayerPoker> getPlayerPokerbyId(
+			@PathParam("idTable") int idTable,
 			@PathParam("pseudo") String pseudo) {
 		Iterator<PlayerPoker> ite = daoplayer.getPlayerPokerbyId(idTable);
 		ArrayList<PlayerPoker> list = new ArrayList<PlayerPoker>();
-		while(ite.hasNext()) {
+		while (ite.hasNext()) {
 			list.add(ite.next());
 		}
 		if (list.isEmpty()) {

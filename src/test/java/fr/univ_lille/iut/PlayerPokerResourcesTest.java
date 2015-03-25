@@ -55,20 +55,25 @@ public class PlayerPokerResourcesTest extends JerseyTest {
 				.post(playerPokerEntity).readEntity(PlayerPoker.class);
 		return savedPlayerPoker;
 	}
-	
+
 	@Test
 	public void testUpdateMise() {
 		this.init();
-		PlayerPoker playerPoker = this.createPlayerPoker(1, "test", 1200, "carte1", "carte2", 0, 0, 0);
+		PlayerPoker playerPoker = this.createPlayerPoker(1, "test", 1200,
+				"carte1", "carte2", 0, 0, 0);
 		Entity<PlayerPoker> playerPokerEntity = Entity.entity(playerPoker,
 				MediaType.APPLICATION_JSON);
-		int statut = target("/playerPoker/500").request().put(playerPokerEntity).getStatus();
-		assertEquals(200,statut);
-		PlayerPoker MajplayerPoker = target("/playerPoker/1/test").request().get(
-				PlayerPoker.class);
-		TablePoker tablePoker = target("/tablePoker/1").request().get(TablePoker.class);
-		assertEquals(1000, tablePoker.getPot());
-		assertEquals(500,MajplayerPoker.getMise());
+		int statut = target(
+				"/playerPoker/500?pseudo=" + playerPoker.getPseudo()
+						+ "&idTable=" + playerPoker.getIdTable()).request()
+				.put(playerPokerEntity).getStatus();
+		assertEquals(200, statut);
+		PlayerPoker MajplayerPoker = target("/playerPoker/1/test").request()
+				.get(PlayerPoker.class);
+		TablePoker tablePoker = target("/tablePoker/1").request().get(
+				TablePoker.class);
+		assertEquals(500, tablePoker.getPot());
+		assertEquals(500, MajplayerPoker.getMise());
 		assertEquals(700, MajplayerPoker.getPot());
 	}
 }
