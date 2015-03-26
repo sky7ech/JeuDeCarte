@@ -25,6 +25,7 @@ $('#Afficher').click(function (event) {
 
 
 $('#Relancer').click(function(event){
+	$.ajax({
 		url: "/webapi/playerpoker/" + $('#Relance').value + "?pseudo= {" + readCookie("pseudo") + "}&idTable={ " + readCookie(idTable)+ "}"
 		 "/,
 		/{mise}?pseudo={pseudo}&idTable={idTable}")
@@ -48,7 +49,6 @@ $('#Relancer').click(function(event){
 	});
 });
 
-})
 
 function readCookie(name) {
 	var nameEQ = name + "=";
@@ -59,4 +59,51 @@ function readCookie(name) {
 		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
 	}
 	return null;
+}
+
+function afficherflop(){
+	$.ajax({
+		url:"/webapi/tablepoker/ "+ readCookie("idtable") + "/"
+		type : "GET"
+		data{
+
+		}
+		dataType: "json"
+		success:function(json){
+				$("#Flop1").html(("<img src=\"CSS/Image/"+flop1 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+				$("#Flop2").html(("<img src=\"CSS/Image/"+flop2 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+				$("#Flop3").html(("<img src=\"CSS/Image/"+flop3 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+			};
+		}
+	})
+}
+
+function afficherturn(){
+	$.ajax({
+		url:"/webapi/tablepoker/ "+ readCookie("idtable") + "/"
+		type : "GET"
+		data{
+
+		}
+		dataType: "json"
+		success:function(json){
+				$("#Turn").html(("<img src=\"CSS/Image/"+turn + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+			};
+		}
+	})
+}
+
+function afficherriver(){
+	$.ajax({
+		url:"/webapi/tablepoker/ "+ readCookie("idtable") + "/"
+		type : "GET"
+		data{
+
+		}
+		dataType: "json"
+		success:function(json){
+				$("#River").html(("<img src=\"CSS/Image/"+river+ ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+			};
+		}
+	})
 }
