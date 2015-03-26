@@ -17,20 +17,19 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 
 public class MainActivity extends Activity {
+    private Integer numeroTour = 0;
     private List<String> listeNomCartes;
     private List<ImageView> listeImageView;
     private List<User> listUser;
     private Dialog d;
     private Integer miseMinimale = 30;
-
+    private List<String> listCarte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +66,13 @@ public class MainActivity extends Activity {
         listUser.add(new User("tmp6", 10000, 0, 2, false));
         ListView listView = (ListView) findViewById(R.id.listUser);
         ArrayAdapter<String> itemsAdapter = new CustomListAdapter(this, listUser);
-
         listView.setAdapter(itemsAdapter);
         TextView tv = (TextView) findViewById(R.id.pot);
-        tv.setText("0 €");
+        tv.setText("45 €");
         TextView tw = (TextView) findViewById(R.id.miseMin);
         tw.setText("30 €");
+        distribuerCarte();
+        reloadListJoueur();
     }
 
     private void initialiserPaquetCarte() {
@@ -86,7 +86,25 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void redistributeCards(View view) {
+    public void distribuerCarte() {
+        listCarte = new ArrayList<>();
+        Random r = new Random();
+        int random;
+        for (int i = 0; i < 5; i++) {
+            random = r.nextInt(listeNomCartes.size());
+            listCarte.add(listeNomCartes.get(random));
+            listeNomCartes.remove(random);
+        }
+        for (int i = 0; i < listUser.size(); i++) {
+            random = r.nextInt(listeNomCartes.size());
+            listUser.get(i).setCarte1(listeNomCartes.get(random));
+            listeNomCartes.remove(random);
+            random = r.nextInt(listeNomCartes.size());
+            listUser.get(i).setCarte2(listeNomCartes.get(random));
+            listeNomCartes.remove(random);
+        }
+    }
+    /*public void redistributeCards(View view) {
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(25);
         Random r = new Random();
@@ -96,7 +114,7 @@ public class MainActivity extends Activity {
             listeImageView.get(i).setImageResource(getResources().getIdentifier(listeNomCartes.get(random), "drawable", getPackageName()));
             listeNomCartes.remove(random);
         }
-    }
+    }*/
 
     public User cEstLeTourDeQui() {
         for (int i = 0; i < listUser.size(); i++) {
@@ -144,12 +162,19 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseTemporaire());
+                try {
+                    cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseActuelle() + cEstLeTourDeQui().getMiseTemporaire());
+                } catch (Exception e) {
+                    cEstLeTourDeQui().setMiseActuelle(miseMinimale);
+                    d.dismiss();
+                    passeAuProchainTour(4);
+                }
                 if (miseMinimale < cEstLeTourDeQui().getMiseActuelle()) {
                     miseMinimale = cEstLeTourDeQui().getMiseActuelle();
+                    d.dismiss();
+                    passeAuProchainTour(5);
                 }
-                d.dismiss();
-                passeAuProchainTour(5);
+
             }
         });
         SeekBar sk = (SeekBar) d.findViewById(R.id.seekBar);
@@ -166,6 +191,10 @@ public class MainActivity extends Activity {
         t.setText(getPot() + " €");
         TextView tv = (TextView) findViewById(R.id.miseMin);
         tv.setText(miseMinimale + " €");
+        listeImageView.get(0).setImageResource(getResources().getIdentifier(cEstLeTourDeQui().getCarte1(), "drawable", getPackageName()));
+        listeImageView.get(1).setImageResource(getResources().getIdentifier(cEstLeTourDeQui().getCarte2(), "drawable", getPackageName()));
+
+
     }
 
     public Integer getPot() {
@@ -181,9 +210,7 @@ public class MainActivity extends Activity {
     }
 
     public void cliqueBoutonSuivre(View view) {
-
         cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseActuelle() + this.getMiseMinimaleJoueurEnCours());
-
         passeAuProchainTour(4);
     }
 
@@ -194,22 +221,41 @@ public class MainActivity extends Activity {
         User user = cEstLeTourDeQui();
         user.setcEstASonTourDeJouer(false);
         selectionneLeProchainJoueur(user);
-        if (tourTermine()) {
+        if (partieTerminee()) {
             Toast.makeText(this, "Le gagnant du pot est " + cEstLeTourDeQui(), Toast.LENGTH_SHORT).show();
+        } else if (tourTermine()) {
+            numeroTour++;
+            effectuerTour();
+            reloadListJoueur();
+        } else {
+            reloadListJoueur();
         }
-        reloadListJoueur();
+    }
+
+    private boolean tourTermine() {
+        int nombreDePersonne = 0;
+        for (int i = 0; i < listUser.size(); i++) {
+            if (listUser.get(i).getStatut() == 3 || listUser.get(i).getArgentDispo() == 0 || ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle() == miseMinimale)) {
+
+            }else{
+                nombreDePersonne++;
+
+            }
+        }
+        //Toast.makeText(this,nombreDePersonne+"",Toast.LENGTH_SHORT).show();
+        return nombreDePersonne == 0;
     }
 
     public void selectionneLeProchainJoueur(User user) {
         int indiceUser = (cEstLIndiceDeQui(user) + 1) % listUser.size();
-        if (tourTermine()) {
+        if (partieTerminee()) {
             for (int i = 0; i < listUser.size(); i++) {
                 if (listUser.get(i).getStatut() != 3) {
                     indiceUser = i;
                 }
             }
         } else {
-            while (listUser.get(indiceUser).getStatut() == 3) {
+            while (listUser.get(indiceUser).getStatut() == 3 || listUser.get(indiceUser).getArgentDispo() == 0) {
                 indiceUser = (indiceUser + 1) % listUser.size();
             }
         }
@@ -217,10 +263,10 @@ public class MainActivity extends Activity {
     }
 
 
-    public boolean tourTermine() {
+    public boolean partieTerminee() {
         int nombreDePersonneCouchee = 0;
         for (int i = 0; i < listUser.size(); i++) {
-            if (listUser.get(i).getStatut() == 3) {
+            if (listUser.get(i).getStatut() == 3 || listUser.get(i).getArgentDispo() == 0) {
                 nombreDePersonneCouchee++;
             }
         }
@@ -233,5 +279,22 @@ public class MainActivity extends Activity {
             miseMinimaleJoueur = miseMinimale - cEstLeTourDeQui().getMiseActuelle();
         }
         return miseMinimaleJoueur;
+    }
+
+    public void effectuerTour() {
+        for (int i = 0; i < listUser.size(); i++) {
+            if ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle() == miseMinimale) {
+                listUser.get(i).setStatut(0);
+            }
+        }
+        if (numeroTour == 1) {
+            listeImageView.get(2).setImageResource(getResources().getIdentifier(listCarte.get(0), "drawable", getPackageName()));
+            listeImageView.get(3).setImageResource(getResources().getIdentifier(listCarte.get(1), "drawable", getPackageName()));
+            listeImageView.get(4).setImageResource(getResources().getIdentifier(listCarte.get(2), "drawable", getPackageName()));
+        } else if (numeroTour == 2) {
+            listeImageView.get(5).setImageResource(getResources().getIdentifier(listCarte.get(3), "drawable", getPackageName()));
+        } else if (numeroTour == 3) {
+            listeImageView.get(6).setImageResource(getResources().getIdentifier(listCarte.get(4), "drawable", getPackageName()));
+        }
     }
 }

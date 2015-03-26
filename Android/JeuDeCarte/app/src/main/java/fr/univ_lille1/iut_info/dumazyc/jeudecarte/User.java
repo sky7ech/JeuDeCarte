@@ -1,8 +1,6 @@
 package fr.univ_lille1.iut_info.dumazyc.jeudecarte;
 
-/**
- * Created by dumazyc on 16/03/15.
- */
+
 public class User {
     private String pseudo;
     private Integer argentDispo;
@@ -10,7 +8,8 @@ public class User {
     private Integer statut;
     private boolean cEstASonTourDeJouer;
     private Integer miseTemporaire;
-
+    private String carte1;
+    private String carte2;
 
     public User(String pseudo, Integer argentDispo, Integer miseActuelle, Integer statut, boolean cEstASonTourDeJouer) {
         this.pseudo = pseudo;
@@ -79,4 +78,19 @@ public class User {
         this.cEstASonTourDeJouer = cEstASonTourDeJouer;
     }
 
+    public String getCarte1() {
+        return carte1;
+    }
+
+    public void setCarte1(String carte1) {
+        this.carte1 = carte1;
+    }
+
+    public String getCarte2() {
+        return carte2;
+    }
+
+    public void setCarte2(String carte2) {
+        this.carte2 = carte2;
+    }
 }

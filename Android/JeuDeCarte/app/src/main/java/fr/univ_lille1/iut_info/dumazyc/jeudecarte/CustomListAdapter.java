@@ -36,7 +36,8 @@ public class CustomListAdapter extends ArrayAdapter {
         TextView argent = (TextView) rowView.findViewById(R.id.argent);
         argent.setText(listUser.get(position).getArgentDispo() + "€");
         TextView statut = (TextView) rowView.findViewById(R.id.statut);
-
+        if (listUser.get(position).getStatut() == 0)
+            statut.setText("");
         if (listUser.get(position).getStatut() == 1)
             statut.setText("Petite Blind");
         if (listUser.get(position).getStatut() == 2)

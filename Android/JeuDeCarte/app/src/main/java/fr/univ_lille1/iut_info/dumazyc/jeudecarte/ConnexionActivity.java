@@ -3,12 +3,16 @@ package fr.univ_lille1.iut_info.dumazyc.jeudecarte;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 
 public class ConnexionActivity extends Activity {
@@ -28,10 +32,41 @@ public class ConnexionActivity extends Activity {
         TextView tvpassword = (TextView) findViewById(R.id.editMdp);
         tvpassword.setText(password);
     }
+    public class AsyncGet extends AsyncTask<String, Long, String> {
+        protected Downloader downloader ;
+        public void onPreExecute() { super.onPreExecute();        }
+        public void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
+        public String doInBackground(String... url) {
+            try {
+                downloader = new Downloader(url[0]);
+                return downloader.get();
+            } catch (IOException Exc) {
+                return null ;
+            }
+        }
+        public void onProgressUpdate(Long... values) {
+        }
+    }
 
     public void cliqueBouttonConnexion(View v) {
         Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(25);
+        String reponse ;
+        AsyncGet asyncGet = new AsyncGet();
+        Toast.makeText(this, "Run...", Toast.LENGTH_SHORT).show() ;
+        asyncGet.execute("");
+        try {
+            reponse = asyncGet.get() ;
+            Toast.makeText(this, reponse, Toast.LENGTH_LONG).show() ;
+        } catch (Exception e) {
+
+        }
+
+
+
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
