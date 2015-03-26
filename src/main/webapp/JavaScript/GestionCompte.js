@@ -51,6 +51,7 @@ $('#Connexion').click(function (event) {
 		type: 'GET',
 		dataType : "json",
 		success:function(json) {
+			createCookie("idtable",1,7)
 			createCookie("pseudo",pseudo,7)
 			window.location.href = "EcranJeu.html";
 		},
