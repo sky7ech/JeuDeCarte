@@ -26,10 +26,10 @@ public class MainActivity extends Activity {
     private Integer numeroTour = 0;
     private List<String> listeNomCartes;
     private List<ImageView> listeImageView;
-    private List<User> listUser;
+    private ArrayList<User> listUser;
     private Dialog d;
     private Integer miseMinimale = 30;
-    private List<String> listCarte;
+    private ArrayList<String> listCarte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,9 @@ public class MainActivity extends Activity {
         tw.setText("30 €");
         distribuerCarte();
         reloadListJoueur();
+        ComparateurDeScore c = new ComparateurDeScore(listUser, listCarte);
+        Toast.makeText(this, "Le gagnant du pot est " + c.quiEstLeGagnant(), Toast.LENGTH_LONG).show();
+        //System.out.print("..................Le gagnant du pot est " + c.quiEstLeGagnant().toString());
     }
 
     private void initialiserPaquetCarte() {
@@ -136,14 +139,9 @@ public class MainActivity extends Activity {
 
     @Override
     public void onDestroy() {
-        /*System.gc();
-        for (int i = 0; i < listeImageView.size(); i++) {
-            listeImageView.get(i).setImageDrawable(null);
-        }*/
         MediaPlayer m = MediaPlayer.create(this, R.raw.stop);
         m.start();
         super.onDestroy();
-
     }
 
     public void relancer(View view) {
@@ -163,17 +161,23 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 try {
-                    cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseActuelle() + cEstLeTourDeQui().getMiseTemporaire());
+                    //cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseActuelle() + cEstLeTourDeQui().getMiseTemporaire());
+                    cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseTemporaire());
+
                 } catch (Exception e) {
                     cEstLeTourDeQui().setMiseActuelle(miseMinimale);
-                    d.dismiss();
+
                     passeAuProchainTour(4);
-                }
-                if (miseMinimale < cEstLeTourDeQui().getMiseActuelle()) {
-                    miseMinimale = cEstLeTourDeQui().getMiseActuelle();
                     d.dismiss();
-                    passeAuProchainTour(5);
+                } finally {
+                    if (miseMinimale < cEstLeTourDeQui().getMiseActuelle()) {
+                        miseMinimale = cEstLeTourDeQui().getMiseActuelle();
+                        passeAuProchainTour(5);
+                        d.dismiss();
+
+                    }
                 }
+
 
             }
         });
@@ -222,9 +226,32 @@ public class MainActivity extends Activity {
         user.setcEstASonTourDeJouer(false);
         selectionneLeProchainJoueur(user);
         if (partieTerminee()) {
-            Toast.makeText(this, "Le gagnant du pot est " + cEstLeTourDeQui(), Toast.LENGTH_SHORT).show();
+            ArrayList<User> tmp = new ArrayList<>();
+            for (int i = 0; i < listUser.size(); i++) {
+                if ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle().equals(miseMinimale)) {
+                    tmp.add(listUser.get(i));
+                }
+            }
+            ComparateurDeScore c = new ComparateurDeScore(tmp, listCarte);
+            Toast.makeText(this, "Le gagnant du pot est " + c.quiEstLeGagnant(), Toast.LENGTH_LONG).show();
+            System.out.print("..................Le gagnant du pot est " + c.quiEstLeGagnant());
+            //Toast.makeText(this, "Le gagnant du pot est " + cEstLeTourDeQui(), Toast.LENGTH_SHORT).show();
+            numeroTour = 0;
         } else if (tourTermine()) {
             numeroTour++;
+            if (numeroTour == 4) {
+                ArrayList<User> tmp = new ArrayList<>();
+                for (int i = 0; i < listUser.size(); i++) {
+                    if ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle().equals(miseMinimale)) {
+                        tmp.add(listUser.get(i));
+                    }
+                }
+                ComparateurDeScore c = new ComparateurDeScore(tmp, listCarte);
+                Toast.makeText(this, "Le gagnant du pot est " + c.quiEstLeGagnant(), Toast.LENGTH_LONG).show();
+                System.out.print("..................Le gagnant du pot est " + c.quiEstLeGagnant());
+                //Toast.makeText(this, "Le gagnant du pot est " + cEstLeTourDeQui(), Toast.LENGTH_SHORT).show();
+                numeroTour = 0;
+            }
             effectuerTour();
             reloadListJoueur();
         } else {
@@ -235,15 +262,11 @@ public class MainActivity extends Activity {
     private boolean tourTermine() {
         int nombreDePersonne = 0;
         for (int i = 0; i < listUser.size(); i++) {
-            if (listUser.get(i).getStatut() == 3 || listUser.get(i).getArgentDispo() == 0 || ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle() == miseMinimale)) {
-
-            }else{
+            if (listUser.get(i).getStatut() == 3 || listUser.get(i).getArgentDispo() == 0 || ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle().equals(miseMinimale))) {
                 nombreDePersonne++;
-
             }
         }
-        //Toast.makeText(this,nombreDePersonne+"",Toast.LENGTH_SHORT).show();
-        return nombreDePersonne == 0;
+        return nombreDePersonne == listUser.size();
     }
 
     public void selectionneLeProchainJoueur(User user) {
@@ -283,11 +306,13 @@ public class MainActivity extends Activity {
 
     public void effectuerTour() {
         for (int i = 0; i < listUser.size(); i++) {
-            if ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle() == miseMinimale) {
+            if ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle().equals(miseMinimale)) {
                 listUser.get(i).setStatut(0);
             }
         }
-        if (numeroTour == 1) {
+        if (numeroTour == 0) {
+            //TODO
+        } else if (numeroTour == 1) {
             listeImageView.get(2).setImageResource(getResources().getIdentifier(listCarte.get(0), "drawable", getPackageName()));
             listeImageView.get(3).setImageResource(getResources().getIdentifier(listCarte.get(1), "drawable", getPackageName()));
             listeImageView.get(4).setImageResource(getResources().getIdentifier(listCarte.get(2), "drawable", getPackageName()));

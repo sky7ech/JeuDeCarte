@@ -7,7 +7,7 @@ public class User {
     private Integer miseActuelle;
     private Integer statut;
     private boolean cEstASonTourDeJouer;
-    private Integer miseTemporaire;
+    private Integer miseTemporaire =0;
     private String carte1;
     private String carte2;
 
@@ -19,11 +19,14 @@ public class User {
         this.cEstASonTourDeJouer = cEstASonTourDeJouer;
     }
 
-    @Override
-    public String toString() {
-        return pseudo;
-    }
 
+    public String toStringAll() {
+        return ".............." +pseudo + "  "+argentDispo+ "  "+miseActuelle+ "  "+statut+ "  "+cEstASonTourDeJouer+ "  "+miseTemporaire;
+    }
+    @Override
+    public String toString(){
+        return getPseudo();
+    }
     public String getPseudo() {
         return pseudo;
     }
