@@ -27,26 +27,26 @@ $('#Afficher').click(function (event) {
 $('#Relancer').click(function(event){
 	$.ajax({
 		url: "/webapi/playerpoker/" + $('#Relance').value + "?pseudo= {" + readCookie("pseudo") + "}&idTable={ " + readCookie(idTable)+ "}"
-		 "/,
+		"/,
 		/{mise}?pseudo={pseudo}&idTable={idTable}")
-		type: "PUT",
-		data: { 
-			
-		},
-		dataType: "json",
-		success: function(json){
-			alert("Votre mise a était pris en compte")
-		},
-		error: function(xhr, status, errorThrown){
-			alert( "Votre mise n'a pas était pris en compte" );
-			console.log( "Error: " + errorThrown );
-			console.log( "Status: " + status );
-			console.dir( xhr );
-		},
-		complete: function(xhr,status){
-			alert("The request is complete!");
-		}
-	});
+	type: "PUT",
+	data: { 
+
+	},
+	dataType: "json",
+	success: function(json){
+		alert("Votre mise a était pris en compte")
+	},
+	error: function(xhr, status, errorThrown){
+		alert( "Votre mise n'a pas était pris en compte" );
+		console.log( "Error: " + errorThrown );
+		console.log( "Status: " + status );
+		console.dir( xhr );
+	},
+	complete: function(xhr,status){
+		alert("The request is complete!");
+	}
+});
 });
 
 
@@ -70,12 +70,21 @@ function afficherflop(){
 		}
 		dataType: "json"
 		success:function(json){
-				$("#Flop1").html(("<img src=\"CSS/Image/"+flop1 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
-				$("#Flop2").html(("<img src=\"CSS/Image/"+flop2 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
-				$("#Flop3").html(("<img src=\"CSS/Image/"+flop3 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
-			};
+			$("#Flop1").html(("<img src=\"CSS/Image/"+flop1 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+			$("#Flop2").html(("<img src=\"CSS/Image/"+flop2 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+			$("#Flop3").html(("<img src=\"CSS/Image/"+flop3 + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
 		}
-	})
+		error: function(xhr, status, errorThrown){
+			alert( "Votre mise n'a pas était pris en compte" );
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			console.dir( xhr );
+		},
+		complete: function(xhr,status){
+			alert("The request is complete!");
+		}
+	}
+})
 }
 
 function afficherturn(){
@@ -87,9 +96,18 @@ function afficherturn(){
 		}
 		dataType: "json"
 		success:function(json){
-				$("#Turn").html(("<img src=\"CSS/Image/"+turn + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
-			};
+			$("#Turn").html(("<img src=\"CSS/Image/"+turn + ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
 		}
+		error: function(xhr, status, errorThrown){
+			alert( "Votre mise n'a pas était pris en compte" );
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			console.dir( xhr );
+		},
+		complete: function(xhr,status){
+			alert("The request is complete!");
+		}
+
 	})
 }
 
@@ -102,8 +120,42 @@ function afficherriver(){
 		}
 		dataType: "json"
 		success:function(json){
-				$("#River").html(("<img src=\"CSS/Image/"+river+ ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
-			};
+			$("#River").html(("<img src=\"CSS/Image/"+river+ ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
 		}
+		error: function(xhr, status, errorThrown){
+			alert( "Votre mise n'a pas était pris en compte" );
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			console.dir( xhr );
+		},
+		complete: function(xhr,status){
+			alert("The request is complete!");
+		}
+	}
+})
+}
+
+function affichercarte(){
+	$.ajax({
+		url:"/webapi/playerpoker/" + readCookie("idtable") + "/" + readCookie("pseudo") + "/",
+		type : "GET"
+		data{
+
+		}
+		dataType : "json"
+		success:function(json){
+			$("#Carte1").html(("<img src=\"CSS/Image/"+carte1+ ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+			$("#Carte1").html(("<img src=\"CSS/Image/"+carte2+ ".jpg\" alt=\"...\" class=\"img-rounded\" height=\"120\" width=\"87\">");)
+		}
+		error: function(xhr, status, errorThrown){
+			alert( "Votre mise n'a pas était pris en compte" );
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			console.dir( xhr );
+		},
+		complete: function(xhr,status){
+			alert("The request is complete!");
+		}
+	}
 	})
 }
