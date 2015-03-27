@@ -9,7 +9,6 @@ import android.os.Vibrator;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * Classe contenant l'activit&eacute; du jeu de poker.
+ */
 public class MainActivity extends Activity {
     private Integer numeroTour = 0;
     private List<String> listeNomCartes;
@@ -30,6 +31,8 @@ public class MainActivity extends Activity {
     private Dialog d;
     private Integer miseMinimale = 30;
     private ArrayList<String> listCarte;
+    private User userGagnant;
+    private Integer petiteBlind = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         create();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
     }
 
+    /**
+     * Permet de lancer un nouveau tour (redistribuage des cartes, mise du pot &agrave; 0,attribution des blinds...)
+     */
     public void create() {
         setContentView(R.layout.activity_main);
         ImageView imageCarte1 = (ImageView) findViewById(R.id.carte1);
@@ -57,15 +64,26 @@ public class MainActivity extends Activity {
         listeImageView.add(imageCarteFlop4);
         listeImageView.add(imageCarteFlop5);
         initialiserPaquetCarte();
-        listUser = new ArrayList<>();
-        listUser.add(new User("tmp1", 10000, 0, 0, true));
-        listUser.add(new User("tmp2", 10000, 0, 0, false));
-        listUser.add(new User("tmp3", 10000, 0, 0, false));
-        listUser.add(new User("tmp4", 10000, 0, 0, false));
-        listUser.add(new User("tmp5", 10000, 0, 1, false));
-        listUser.add(new User("tmp6", 10000, 0, 2, false));
+
+        if (listUser == null) {
+            listUser = new ArrayList<>();
+            listUser.add(new User("tmp1", 10000, 0, true));
+            listUser.add(new User("tmp2", 10000, 0, false));
+            listUser.add(new User("tmp3", 10000, 0, false));
+            listUser.add(new User("tmp4", 10000, 0, false));
+            listUser.add(new User("tmp5", 10000, 1, false));
+            listUser.add(new User("tmp6", 10000, 2, false));
+        } else {
+
+
+            listUser.get((petiteBlind + 1) % listUser.size()).setStatut(1);
+            listUser.get((petiteBlind + 2) % listUser.size()).setStatut(2);
+            listUser.get((petiteBlind + 3) % listUser.size()).setcEstASonTourDeJouer(true);
+            petiteBlind++;
+        }
         ListView listView = (ListView) findViewById(R.id.listUser);
-        ArrayAdapter<String> itemsAdapter = new CustomListAdapter(this, listUser);
+        CustomListAdapter itemsAdapter;
+        itemsAdapter = new CustomListAdapter(this, listUser);
         listView.setAdapter(itemsAdapter);
         TextView tv = (TextView) findViewById(R.id.pot);
         tv.setText("45 €");
@@ -73,11 +91,11 @@ public class MainActivity extends Activity {
         tw.setText("30 €");
         distribuerCarte();
         reloadListJoueur();
-        ComparateurDeScore c = new ComparateurDeScore(listUser, listCarte);
-        Toast.makeText(this, "Le gagnant du pot est " + c.quiEstLeGagnant(), Toast.LENGTH_LONG).show();
-        //System.out.print("..................Le gagnant du pot est " + c.quiEstLeGagnant().toString());
     }
 
+    /**
+     * Permet d'initialiser la liste des noms de cartes.
+     */
     private void initialiserPaquetCarte() {
         this.listeNomCartes = new ArrayList<>();
         String nomDeLaCarte;
@@ -89,6 +107,9 @@ public class MainActivity extends Activity {
         }
     }
 
+    /**
+     * Distribue les cartes al&eacute;atoirement aux joueurs et sur le flop
+     */
     public void distribuerCarte() {
         listCarte = new ArrayList<>();
         Random r = new Random();
@@ -107,18 +128,12 @@ public class MainActivity extends Activity {
             listeNomCartes.remove(random);
         }
     }
-    /*public void redistributeCards(View view) {
-        Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(25);
-        Random r = new Random();
-        int random;
-        for (int i = 0; i < 7; i++) {
-            random = r.nextInt(listeNomCartes.size());
-            listeImageView.get(i).setImageResource(getResources().getIdentifier(listeNomCartes.get(random), "drawable", getPackageName()));
-            listeNomCartes.remove(random);
-        }
-    }*/
 
+    /**
+     * Permet de savoir c'est au tour de quel utilisateur de jouer.
+     *
+     * @return l'utilisateur &agrave; qui c'est le tour de jouer
+     */
     public User cEstLeTourDeQui() {
         for (int i = 0; i < listUser.size(); i++) {
             if (listUser.get(i).getcEstASonTourDeJouer()) {
@@ -128,6 +143,12 @@ public class MainActivity extends Activity {
         return null;
     }
 
+    /**
+     * Permet de savoir quel est l'indice d'un utilisateur dans la liste listUser
+     *
+     * @param user l'utilisateur dont on veut savoir l'indice
+     * @return l'indice de l'utilisateur dans la liste listUser
+     */
     public int cEstLIndiceDeQui(User user) {
         for (int i = 0; i < listUser.size(); i++) {
             if (listUser.get(i).equals(user)) {
@@ -144,8 +165,10 @@ public class MainActivity extends Activity {
         super.onDestroy();
     }
 
+    /**
+     * Permet de lancer le Dialog qui permet &agrave; l'utilisateur de choisir de combien il veut relancer.
+     */
     public void relancer(View view) {
-
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(25);
         int argent = cEstLeTourDeQui().getArgentDispo();
@@ -187,9 +210,13 @@ public class MainActivity extends Activity {
         d.show();
     }
 
+    /**
+     * Permet de rafraichir l'affichage de la liste des joueurs.
+     */
     public void reloadListJoueur() {
         ListView listView = (ListView) findViewById(R.id.listUser);
-        ArrayAdapter<String> itemsAdapter = new CustomListAdapter(this, listUser);
+        CustomListAdapter itemsAdapter;
+        itemsAdapter = new CustomListAdapter(this, listUser);
         listView.setAdapter(itemsAdapter);
         TextView t = (TextView) findViewById(R.id.pot);
         t.setText(getPot() + " €");
@@ -201,6 +228,11 @@ public class MainActivity extends Activity {
 
     }
 
+    /**
+     * Permet de conna&icirc;tre la valeur du pot
+     *
+     * @return valeur du pot
+     */
     public Integer getPot() {
         Integer pot = 0;
         for (int i = 0; i < listUser.size(); i++) {
@@ -209,15 +241,26 @@ public class MainActivity extends Activity {
         return pot;
     }
 
+    /**
+     * M&eacute;thode qui permet &agrave; l'utilisateur de se coucher
+     */
     public void cliqueBoutonSeCoucher(View view) {
         passeAuProchainTour(3);
     }
 
+    /**
+     * M&eacute;thode qui permet &agrave; l'utilisateur de suivre
+     */
     public void cliqueBoutonSuivre(View view) {
         cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseActuelle() + this.getMiseMinimaleJoueurEnCours());
         passeAuProchainTour(4);
     }
 
+    /**
+     * Permet de tester si le tour ou la partie est termin&eacute;.
+     *
+     * @param statut action du joueur
+     */
     public void passeAuProchainTour(int statut) {
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(25);
@@ -232,11 +275,12 @@ public class MainActivity extends Activity {
                     tmp.add(listUser.get(i));
                 }
             }
-            ComparateurDeScore c = new ComparateurDeScore(tmp, listCarte);
-            Toast.makeText(this, "Le gagnant du pot est " + c.quiEstLeGagnant(), Toast.LENGTH_LONG).show();
-            System.out.print("..................Le gagnant du pot est " + c.quiEstLeGagnant());
-            //Toast.makeText(this, "Le gagnant du pot est " + cEstLeTourDeQui(), Toast.LENGTH_SHORT).show();
+            userGagnant = new ComparateurDeScore(tmp, listCarte).quiEstLeGagnant();
+
+            Toast.makeText(this, "Le gagnant du pot est " + userGagnant, Toast.LENGTH_LONG).show();
             numeroTour = 0;
+            effectuerTour();
+            reloadListJoueur();
         } else if (tourTermine()) {
             numeroTour++;
             if (numeroTour == 4) {
@@ -246,10 +290,9 @@ public class MainActivity extends Activity {
                         tmp.add(listUser.get(i));
                     }
                 }
-                ComparateurDeScore c = new ComparateurDeScore(tmp, listCarte);
-                Toast.makeText(this, "Le gagnant du pot est " + c.quiEstLeGagnant(), Toast.LENGTH_LONG).show();
-                //System.out.print("..................Le gagnant du pot est " + c.quiEstLeGagnant());
-                //Toast.makeText(this, "Le gagnant du pot est " + cEstLeTourDeQui(), Toast.LENGTH_SHORT).show();
+                userGagnant = new ComparateurDeScore(tmp, listCarte).quiEstLeGagnant();
+
+                Toast.makeText(this, "Le gagnant du pot est " + userGagnant, Toast.LENGTH_LONG).show();
                 numeroTour = 0;
             }
             effectuerTour();
@@ -259,6 +302,11 @@ public class MainActivity extends Activity {
         }
     }
 
+    /**
+     * Permet de savoir si le tour est termin&eacute;
+     *
+     * @return true si le tour est termin&eacute;, false sinon
+     */
     private boolean tourTermine() {
         int nombreDePersonne = 0;
         for (int i = 0; i < listUser.size(); i++) {
@@ -269,6 +317,11 @@ public class MainActivity extends Activity {
         return nombreDePersonne == listUser.size();
     }
 
+    /**
+     * Permet de savoir quel utilisateur sera le prochain &agrave; jouer.
+     *
+     * @param user utilisateur qui a termin&eacute; son tour
+     */
     public void selectionneLeProchainJoueur(User user) {
         int indiceUser = (cEstLIndiceDeQui(user) + 1) % listUser.size();
         if (partieTerminee()) {
@@ -285,7 +338,11 @@ public class MainActivity extends Activity {
         listUser.get(indiceUser).setcEstASonTourDeJouer(true);
     }
 
-
+    /**
+     * Permet de savoir si la partie est termin&eacute;e
+     *
+     * @return true si la partie est termin&eacute;e, false sinon
+     */
     public boolean partieTerminee() {
         int nombreDePersonneCouchee = 0;
         for (int i = 0; i < listUser.size(); i++) {
@@ -293,9 +350,14 @@ public class MainActivity extends Activity {
                 nombreDePersonneCouchee++;
             }
         }
-        return nombreDePersonneCouchee == listUser.size() - 1;
+        return nombreDePersonneCouchee == listUser.size();
     }
 
+    /**
+     * Permet de savoir quelle est la mise minimale du joueur qui est en train de jouer.
+     *
+     * @return la mise minimale
+     */
     public Integer getMiseMinimaleJoueurEnCours() {
         Integer miseMinimaleJoueur = 0;
         if (miseMinimale > cEstLeTourDeQui().getMiseActuelle()) {
@@ -304,6 +366,9 @@ public class MainActivity extends Activity {
         return miseMinimaleJoueur;
     }
 
+    /**
+     * Permet de passer au tour suivant
+     */
     public void effectuerTour() {
         for (int i = 0; i < listUser.size(); i++) {
             if ((listUser.get(i).getStatut() == 4 || listUser.get(i).getStatut() == 5) && listUser.get(i).getMiseActuelle().equals(miseMinimale)) {
@@ -311,7 +376,18 @@ public class MainActivity extends Activity {
             }
         }
         if (numeroTour == 0) {
-            //TODO
+            userGagnant.setArgentDispo(userGagnant.getArgentDispo() + getPot());
+            for (int i = 0; i < listUser.size(); i++) {
+                listUser.get(i).setMiseActuelle(0);
+                listUser.get(i).setcEstASonTourDeJouer(false);
+                listUser.get(i).setStatut(0);
+                if (listUser.get(i).getArgentDispo().equals(0)) {
+                    listUser.remove(i);
+                }
+
+            }
+            miseMinimale = 30;
+            create();
         } else if (numeroTour == 1) {
             listeImageView.get(2).setImageResource(getResources().getIdentifier(listCarte.get(0), "drawable", getPackageName()));
             listeImageView.get(3).setImageResource(getResources().getIdentifier(listCarte.get(1), "drawable", getPackageName()));

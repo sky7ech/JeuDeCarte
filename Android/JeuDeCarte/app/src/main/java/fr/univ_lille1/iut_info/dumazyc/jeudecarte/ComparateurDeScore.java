@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Permet de savoir quel utilisateur a le meilleur score
+ */
 public class ComparateurDeScore {
     List<User> listUser;
     List<String> listCarte;
@@ -18,6 +21,12 @@ public class ComparateurDeScore {
     List<User> listUserGagnants;
     User userActuel;
 
+    /**
+     * Constructeur de la classe ComparateurDeScore
+     *
+     * @param listUser  liste des utilisateurs
+     * @param listCarte liste des cartes du flop
+     */
     public ComparateurDeScore(ArrayList<User> listUser, ArrayList<String> listCarte) {
         this.listUser = listUser;
         this.listCarte = listCarte;
@@ -34,6 +43,11 @@ public class ComparateurDeScore {
         }
     }
 
+    /**
+     * Permet de r&eacute;cup&eacute;rer l'utilisateur qui a gagn&eacute;
+     *
+     * @return l'utilisateur qui a gagn&eacute;
+     */
     public User quiEstLeGagnant() {
         for (int i = 0; i < listUser.size(); i++) {
             userActuel = listUser.get(i);
@@ -76,6 +90,9 @@ public class ComparateurDeScore {
         return listUser.get(gagnant());
     }
 
+    /**
+     * Permet de mettre les cartes du flop dans la liste appropri&eacute;e
+     */
     private void mettreFlopDansListe() {
         this.listCarreau = new ArrayList<>();
         this.listCoeur = new ArrayList<>();
@@ -95,6 +112,11 @@ public class ComparateurDeScore {
         }
     }
 
+    /**
+     * Permet de mettre les cartes de la main du joueur en parametre dans la liste appropri&eacute;e
+     *
+     * @param user utilisateur dont on veut prendre ses cartes
+     */
     private void mettreCartesJoueurDansListe(User user) {
         listValeur[Integer.parseInt(user.getCarte1().substring(1, user.getCarte1().indexOf("_"))) - 1]++;
         listValeur[Integer.parseInt(user.getCarte2().substring(1, user.getCarte2().indexOf("_"))) - 1]++;
@@ -108,6 +130,11 @@ public class ComparateurDeScore {
         }
     }
 
+    /**
+     * Permet de savoir si l'utilisateur a une quinte flush
+     *
+     * @return la valeur de cette quinte flush
+     */
     private int testQuinteFlush() {
         for (int j = 0; j < 4; j++) {
             int tmp = 0;
@@ -126,6 +153,11 @@ public class ComparateurDeScore {
         return 0;
     }
 
+    /**
+     * Permet de savoir si l'utilisateur a un carr&eacute;
+     *
+     * @return la valeur de ce carr&eacute;
+     */
     private int testCarre() {
         for (int i = listValeur.length - 1; i > -1; i--) {
             if (listValeur[i].equals(4)) {
@@ -135,6 +167,11 @@ public class ComparateurDeScore {
         return 0;
     }
 
+    /**
+     * Permet de savoir si l'utilisateur a un full
+     *
+     * @return la valeur de ce full
+     */
     private String testFull() {
         if (testBrelan() > 0 && testPaire() > 0) {
             return testBrelan() + "_" + testPaire();
@@ -142,6 +179,11 @@ public class ComparateurDeScore {
         return "";
     }
 
+    /**
+     * Permet de savoir si l'utilisateur a une couleur
+     *
+     * @return la valeur de cette couleur
+     */
     private String testCouleur() {
         for (int i = 0; i < 4; i++) {
             if (getList(i).size() >= 5) {
@@ -157,6 +199,11 @@ public class ComparateurDeScore {
         return "";
     }
 
+    /**
+     * Permet de savoir si l'utilisateur a une suite
+     *
+     * @return la valeur de cette suite
+     */
     private int testSuite() {
         int tmp = 0;
         for (int i = 0; i < listValeur.length; i++) {
@@ -173,6 +220,11 @@ public class ComparateurDeScore {
         return 0;
     }
 
+    /**
+     * Permet de savoir si l'utilisateur a un brelan
+     *
+     * @return la valeur de ce brelan
+     */
     private int testBrelan() {
         for (int i = listValeur.length - 1; i > -1; i--) {
             if (listValeur[i].equals(3)) {
@@ -182,6 +234,11 @@ public class ComparateurDeScore {
         return 0;
     }
 
+    /**
+     * Permet de savoir si l'utilisateur a une double paire
+     *
+     * @return la valeur de cette double paire
+     */
     private String testDoublePaire() {
         String reponse = "";
         int tmp = 0;
@@ -200,6 +257,11 @@ public class ComparateurDeScore {
         return "";
     }
 
+    /**
+     * Permet de savoir si l'utilisateur a une paire
+     *
+     * @return la valeur de cette paire
+     */
     private int testPaire() {
         for (int i = listValeur.length - 1; i > -1; i--) {
             if (listValeur[i].equals(2)) {
@@ -209,7 +271,30 @@ public class ComparateurDeScore {
         return 0;
     }
 
+    /**
+     * Permet de savoir la valeur de la Haute carte
+     *
+     * @return la valeur de la Haute carte
+     */
+    private int testHauteCarte() {
+        for (int i = listValeur.length - 1; i > -1; i--) {
+            if (listValeur[i].equals(1)) {
+                return i;
+            }
+        }
+        return 0;
+    }
 
+    /**
+     * Permet de recuperer la liste des listes de cartes par couleur
+     *
+     * @param i numero de la liste de carte &agrave; r&eacute;cup&eacute;rer:
+     *          0 -> coeur
+     *          1 -> carreau
+     *          2 -> pique
+     *          3 -> trefle
+     * @return la liste des listes de cartes par couleur
+     */
     private List<Integer> getList(int i) {
         if (i == 0)
             return listCoeur;
@@ -222,15 +307,11 @@ public class ComparateurDeScore {
         return null;
     }
 
-    private int testHauteCarte() {
-        for (int i = listValeur.length - 1; i > -1; i--) {
-            if (listValeur[i].equals(1)) {
-                return i;
-            }
-        }
-        return 0;
-    }
-
+    /**
+     * Permet de r&eacute;cup&eacute;rer l'indice du gagnant
+     *
+     * @return l'indice du gagnant
+     */
     private int gagnant() {
         int maxValeur = 9;
         int maxIndice = 0;
@@ -273,12 +354,12 @@ public class ComparateurDeScore {
                     listMaxIndice2.add(listMaxIndice.get(i));
                 }
             } else {
-                if ((maxIndice == 0 && Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0,listScoreValeur.get(listMaxIndice.get(i)).indexOf("_"))) == 0) || Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0,listScoreValeur.get(listMaxIndice.get(i)).indexOf("_"))) == maxIndice) {
-                    maxIndice = Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0,listScoreValeur.get(listMaxIndice.get(i)).indexOf("_")));
+                if ((maxIndice == 0 && Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0, listScoreValeur.get(listMaxIndice.get(i)).indexOf("_"))) == 0) || Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0, listScoreValeur.get(listMaxIndice.get(i)).indexOf("_"))) == maxIndice) {
+                    maxIndice = Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0, listScoreValeur.get(listMaxIndice.get(i)).indexOf("_")));
 
-                } else if (Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0,listScoreValeur.get(listMaxIndice.get(i)).indexOf("_"))) == 0 || (Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0,listScoreValeur.get(listMaxIndice.get(i)).indexOf("_"))) > maxIndice && maxIndice != 0)) {
+                } else if (Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0, listScoreValeur.get(listMaxIndice.get(i)).indexOf("_"))) == 0 || (Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0, listScoreValeur.get(listMaxIndice.get(i)).indexOf("_"))) > maxIndice && maxIndice != 0)) {
                     listMaxIndice2 = new ArrayList<>();
-                    maxIndice = Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0,listScoreValeur.get(listMaxIndice.get(i)).indexOf("_")));
+                    maxIndice = Integer.parseInt(listScoreValeur.get(listMaxIndice.get(i)).substring(0, listScoreValeur.get(listMaxIndice.get(i)).indexOf("_")));
                     listMaxIndice2.add(listMaxIndice.get(i));
                 }
             }

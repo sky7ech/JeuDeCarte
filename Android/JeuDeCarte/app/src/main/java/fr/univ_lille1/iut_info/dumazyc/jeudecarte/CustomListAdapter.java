@@ -10,17 +10,24 @@ import android.widget.TextView;
 
 import java.util.List;
 
-
+/**
+ * Adapter de la liste d'affichage des joueurs
+ */
 public class CustomListAdapter extends ArrayAdapter {
     private final Activity context;
     private final List<User> listUser;
 
+    /**
+     * Constructeur de la classe CustomListAdapter
+     *
+     * @param context  l'activit&eacute; de la classe principale
+     * @param listUser la liste des utilisateurs
+     */
     public CustomListAdapter(Activity context,
                              List<User> listUser) {
         super(context, R.layout.list_adapter, listUser);
         this.context = context;
         this.listUser = listUser;
-
     }
 
     @Override
@@ -51,12 +58,10 @@ public class CustomListAdapter extends ArrayAdapter {
         TextView mise = (TextView) rowView.findViewById(R.id.mise);
         if (listUser.get(position).getStatut() == 1 && listUser.get(position).getMiseActuelle() == 0) {
             listUser.get(position).setMiseActuelle(15);
-
         } else if (listUser.get(position).getStatut() == 2 && listUser.get(position).getMiseActuelle() == 0) {
             listUser.get(position).setMiseActuelle(30);
         }
         mise.setText(listUser.get(position).getMiseActuelle() + "€");
-
         return rowView;
     }
 }

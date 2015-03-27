@@ -11,6 +11,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
+/**
+ * Activit&eacute; de la page d'accueil qui est compos&eacute;e d'un bouton
+ */
 public class AccueilActivity extends Activity {
     MediaPlayer m;
 
@@ -27,6 +30,9 @@ public class AccueilActivity extends Activity {
 
     }
 
+    /**
+     * Effectue l'action de redirection vers la page de ocnnexion
+     */
     public void cliqueBouttonAccueil(View v) {
         Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(25);

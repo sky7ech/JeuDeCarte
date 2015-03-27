@@ -16,18 +16,22 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe permettant de cr&eacute;er un nouveau profil
+ */
 public class CreationProfilActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.creation_profil);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
     }
 
+    /**
+     * Permet de cr&eacute;er de profil
+     */
     public void cliqueBouttonCreer(View v) {
         TextView pseudo = (TextView) findViewById(R.id.editTextPseudo);
         TextView password = (TextView) findViewById(R.id.editTextPassword);
@@ -72,6 +76,9 @@ public class CreationProfilActivity extends Activity {
         }
     }
 
+    /**
+     * Permet d'annuler la cr&eacute;ation de profil
+     */
     public void cliqueBouttonAnnuler(View v) {
         Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(25);
