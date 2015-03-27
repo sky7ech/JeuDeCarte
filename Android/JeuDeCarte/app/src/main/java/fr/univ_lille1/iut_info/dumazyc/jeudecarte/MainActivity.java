@@ -161,8 +161,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 try {
-                    //cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseActuelle() + cEstLeTourDeQui().getMiseTemporaire());
-                    cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseTemporaire());
+                    cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseActuelle() + cEstLeTourDeQui().getMiseTemporaire());
+                    //cEstLeTourDeQui().setMiseActuelle(cEstLeTourDeQui().getMiseTemporaire());
 
                 } catch (Exception e) {
                     cEstLeTourDeQui().setMiseActuelle(miseMinimale);
@@ -248,7 +248,7 @@ public class MainActivity extends Activity {
                 }
                 ComparateurDeScore c = new ComparateurDeScore(tmp, listCarte);
                 Toast.makeText(this, "Le gagnant du pot est " + c.quiEstLeGagnant(), Toast.LENGTH_LONG).show();
-                System.out.print("..................Le gagnant du pot est " + c.quiEstLeGagnant());
+                //System.out.print("..................Le gagnant du pot est " + c.quiEstLeGagnant());
                 //Toast.makeText(this, "Le gagnant du pot est " + cEstLeTourDeQui(), Toast.LENGTH_SHORT).show();
                 numeroTour = 0;
             }
